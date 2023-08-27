@@ -14,7 +14,7 @@
 	<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-	<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script> -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 	<link href="/style.css" rel="stylesheet">
 </head>
 
@@ -129,7 +129,7 @@
 			    		$ed2k = "Connecting ...";
 			    		$ed2k_status = "bg-info text-dark";
 			    	} else {
-			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)") . " " . $stats["serv_name"] . " " . $stats["serv_addr"];
+			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)"); //. " " . $stats["serv_name"] . " " . $stats["serv_addr"];
 			    		$ed2k_status = (($stats["id"] < 16777216) ? "bg-warning text-dark" : "bg-success");
 			    	}
 			    	if ( $stats["kad_connected"] == 1 ) {
@@ -156,8 +156,8 @@
 		</div>
 	
     <!-- Commands -->
-    <form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
-    <input type="hidden" name="command" id="comm">
+   <!--  <form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
+    <input type="hidden" name="command" id="comm"> -->
 <!-- 	  <div class="panel panel-tasks">
   		<div class="panel-body container panel-center">
     		<div class="form-inline form-tasks">
@@ -227,6 +227,8 @@
 	</div> -->
 
 	<!-- BEGIN OF CENTRAL BODY -->
+	<form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
+    <input type="hidden" name="command" id="comm">
 	<div class="shadow container-lg g-0">
 		<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
 			<div class="row align-items-center">
@@ -238,8 +240,8 @@
 				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('cancel');" role="button">Remove</a>
 			</div>
 			<div class="btn-group" role="group">
-				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">H prio</a>
-				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">L prio</a>
+				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">- prio</a>
+				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">+ prio</a>
 			</div>
 			</div>
 			</div>
@@ -473,7 +475,7 @@
 								<div class="popper-content hide">&nbsp;'. $name .'</div>';
 					}
 					$countUploadDimension = 0;
-					$countDownloadDimension = 0;
+					// $countDownloadDimension = 0;
 					$countSpeed = 0;
 					$uploads = amule_load_vars("uploads");
 					$fakevar=0;
