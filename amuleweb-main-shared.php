@@ -8,22 +8,24 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 	<link href="/style.css" rel="stylesheet">
+	<script language="JavaScript" type="text/JavaScript">
+		function formCommandSubmit(command)
+		{
+			<?php
+				if ($_SESSION["guest_login"] != 0) {
+					echo 'alert("You logged in as guest - commands are disabled");';
+					echo "return;";
+			}
+			?>
+		var frm=document.forms.mainform
+		frm.command.value=command
+		frm.submit()
+		}
+</script>
+
 </head>
 
-<script language="JavaScript" type="text/JavaScript">
-function formCommandSubmit(command)
-{
-	<?php
-		if ($_SESSION["guest_login"] != 0) {
-				echo 'alert("You logged in as guest - commands are disabled");';
-				echo "return;";
-		}
-	?>
-	var frm=document.forms.mainform
-	frm.command.value=command
-	frm.submit()
-}
-</script>
+
 
 
 <body>
@@ -158,10 +160,6 @@ function formCommandSubmit(command)
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('reload');" role="button">Refresh</a>
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">+ prio</a>
 						</div>
-						<!-- <div class="btn-group" role="group">
-							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">H prio</a>
-							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">L prio</a>
-						</div> -->
 					</div>
 				</div>
 			</div>
@@ -178,6 +176,7 @@ function formCommandSubmit(command)
 						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=xfer">Up&diams;</a> <a class="text-decoration-none text-muted" href="amuleweb-main-shared.php?sort=xfer_all"> Total&diams;</a></th>
 						<!-- <th scope="col"><a href="amuleweb-main-shared.php?sort=req">Requested</a> <a href="amuleweb-main-shared.php?sort=req_all">(Total)</a></th>
 						<th scope="col"><a href="amuleweb-main-shared.php?sort=acc">Accepted Rqst</a> <a href="amuleweb-main-shared.php?sort=acc_all">(Total)</a></th> -->
+						<th scope="col"><span>Ratio</span></th>
 						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=prio">Priority&diams;</a></th>
 					</tr>
 				</thead>
@@ -240,6 +239,8 @@ function formCommandSubmit(command)
 
 					function my_cmp($a, $b)	{
 						global $sort_order, $sort_reverse;
+						//echo '<p>', $sort_order,'</p>';
+						//echo '<p>', $sort_reverse,'</p>';
 
 						switch ( $sort_order) {
 							case "size": $result = $a->size > $b->size; break;
@@ -279,6 +280,7 @@ function formCommandSubmit(command)
 						}
 
 					}
+
 					$shared = amule_load_vars("shared");
 
 					$sort_order = $HTTP_GET_VARS["sort"];
@@ -294,6 +296,7 @@ function formCommandSubmit(command)
 					}
 					//var_dump($_SESSION);
 					$sort_reverse = $_SESSION["sort_reverse"];
+
 					if ( $sort_order != "" ) {
 						$_SESSION["shared_sort"] = $sort_order;
 						usort(&$shared, "my_cmp");
@@ -303,16 +306,17 @@ function formCommandSubmit(command)
 						foreach ($shared as $file) {
 
 							$ratio = (float)((float)$file->xfer_all / (float)$file->size);
-							$ratio_2 = round($ratio, 2);
+							//$ratio_2 = round($ratio, 2);
 							//$archivo = $file->$name;
 
 							echo '<tr scope="row">';
-							echo '<td >', '<div class="checkbox download-checkbox" style="margin: 0px;"><label><input type="checkbox" name="', $file->hash, '" >&nbsp;', $file->name, "</label></div></td>";
+							echo '<td >', '<div class="form-check" style="margin: 0px;"><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;', $file->name, "</div></td>";
 							echo '<td >', CastToXBytes($file->size), "</td>";
-							echo '<td >', CastToXBytes($file->xfer), " (", CastToXBytes($file->xfer_all),")", $ratio ,"</td>";
+							echo '<td >', CastToXBytes($file->xfer), " (", CastToXBytes($file->xfer_all),")" ,"</td>";
+							echo '<td >', $ratio, "</td>";
 							/* echo '<td >', $file->req, " (", $file->req_all, ")</td>";
 							echo '<td >', $file->accept, " (", $file->accept_all, ")</td>"; */
-							echo '<td >', PrioString($file), "</td>";;
+							echo '<td >', PrioString($file), "</td>";
 							echo '</tr>';
 						}
 					} else {
@@ -320,7 +324,7 @@ function formCommandSubmit(command)
 							if ($HTTP_GET_VARS["select"] == PrioStringSorter($file)) {
 								echo '<tr>';
 
-								echo '<td style="font-size:12px;">', '<div class="checkbox download-checkbox" style="margin: 0px;"><label><input type="checkbox" name="', $file->hash, '" >&nbsp;<b>', $file->name, "</b></label></div></td>";
+								echo '<td style="font-size:12px;">', '<div class="form-check" style="margin: 0px;"><label><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;<b>', $file->name, "</b></label></div></td>";
 								echo '<td style="font-size:12px;">', CastToXBytes($file->xfer), " (", CastToXBytes($file->xfer_all),")</td>";
 								echo '<td style="font-size:12px;">', $file->req, " (", $file->req_all, ")</td>";
 								echo '<td style="font-size:12px;">', $file->accept, " (", $file->accept_all, ")</td>";
@@ -364,7 +368,7 @@ function formCommandSubmit(command)
 		</div>
 		</form>
 		
-		</div>
+		<!-- </div> -->
 
 		<!-- Footer -->
 <!-- 		<div id="footer">
