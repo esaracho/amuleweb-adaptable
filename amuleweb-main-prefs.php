@@ -170,12 +170,12 @@
 
   <script language="JavaScript" type="text/JavaScript">
   function formCommandSubmit(command) {
-    var frm=document.forms.mainform
+    let frm=document.forms.mainform
     frm.command.value=command
     frm.submit()
   }
 
-  var initvals = new Object;
+  let initvals = new Object;
 
   <?php
     // apply new options before proceeding
@@ -246,7 +246,7 @@
   }
 
   function init_data() {
-    var frm = document.forms.mainform
+    let frm = document.forms.mainform
 
     var str_param_names = new Array(
       "max_line_down_cap", "max_line_up_cap",
@@ -305,7 +305,7 @@
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-search.php">Search</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link d-flex active justify-content-end" href="./amuleweb-main-servers.php">Servers</a>
+						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-servers.php">Servers</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-kad.php">Kad</a>
@@ -314,7 +314,7 @@
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-stats.php">Stats</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-prefs.php">Settings</a>
+						<a class="nav-link d-flex active justify-content-end" href="./amuleweb-main-prefs.php">Settings</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-log.php">Logs</a>
@@ -400,30 +400,67 @@
     <!-- Center body -->
     <form name="mainform" action="amuleweb-main-prefs.php" method="post">
            <!-- Commands -->
-    <div class="panel panel-default panel-tasks">
+    <!-- <div class="panel panel-default panel-tasks">
       <div class="panel-body container panel-center">
-        <div class="form-inline form-tasks">
+        <div class="form-inline form-tasks"> -->
             <?php
-              if ($_SESSION["guest_login"] == 0) {
+             /*  if ($_SESSION["guest_login"] == 0) {
                 echo '<input class="btn btn-warning" type="submit" name="Submit" value="Apply">';
               } else {
                 echo '<input class="btn btn-warning" type="submit" name="Submit" value="Apply" disabled>';
                 echo '<br><br><span class="label label-warning">You logged in as guest - commands are disabled</span>';
-              }
+              } */
             ?>
-          </div>
+          <!-- </div>
         </div>
       </div>
-  </div>
+  </div> -->
 
-         <div class="container-fluid panel-tr" style="margin-bottom:60px;">
+   <!-- <div class="container-fluid panel-tr" style="margin-bottom:60px;">
       <div class="panel">
-      <div class="panel-heading panel-center"><h4>PREFERENCES</h4></div>
+      <div class="panel-heading panel-center"><h4>PREFERENCES</h4></div> -->
 
-        <div style="width:600px; margin: auto; margin-top: 20px;">
-          <p><b style="font-size:16px;width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">WEBSERVER</b>
+      <div class="shadow container-lg g-0 pb-3">
+		  	<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+	     		<div class="row">
+	  				<div class="col-sm-6 col-md-2 col-xl-1"><h5 class="">Settings</h5></div>
+	  				<div class="col-sm-6 col-md-10 col-xl-11">
+          <?php
+              if ($_SESSION["guest_login"] == 0) {
+                echo '<input class="btn btn-outline-light" type="submit" name="Submit" value="Apply">';
+              } else {
+                echo '<input class="btn btn-outline-light" type="submit" name="Submit" value="Apply" disabled>';
+                echo '<br><br><span class="label label-warning">You logged in as guest - commands are disabled</span>';
+              }
+            ?>
+	  		  	</div>
+  				</div>
+        </div>
 
-          <div class="btn-group form-inline">
+        <!-- <div style="width:600px; margin: auto; margin-top: 20px;"> -->
+        <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+    			<h5 class="">Webserver</h5>
+		    </div>
+          <!-- <p><b style="font-size:16px;width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">WEBSERVER</b> -->
+        
+          <div class="row g-3 m-3">
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">Page refresh interval</div>
+                <input type="text" name="autorefresh_time" class="form-control" placeholder="Page refresh interval" aria-label="Page refresh interval">
+            </div>
+            </div>
+            <div class="col-sm-6">
+              <!-- <div class="form-check">
+               <label class="form-check-label" for="gzip">Use gzip compression</label>
+               <input class="form-check-input" type="checkbox" name="use_gzip" id="gzip">
+              </div> -->
+              <input type="checkbox" class="btn-check" name="use_gzip" id="gzip" autocomplete="off">
+              <label class="btn btn-outline-primary" for="gzip">Use gzip compression</label>
+            </div>
+          </div>
+
+          <!-- <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
                       background-color:#ffffff;
@@ -452,11 +489,41 @@
                 style=" border-top-left-radius:0px;
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
-          </div></p>
+          </div></p> -->
 
-          <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">BANDWIDTH LIMITS</b>
-
-          <div class="btn-group form-inline">
+          <!-- <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">BANDWIDTH LIMITS</b> -->
+          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+    			  <h5 class="">Bandwidth Limits</h5>
+		      </div>
+          <div class="row g-3 m-3">
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">Max download rate</div>
+                <input type="text" name="max_down_limit" class="form-control" placeholder="Max download rate" aria-label="Max download rate">
+            </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">Max Upload Rate</div>
+                <input type="text" name="max_up_limit" class="form-control" placeholder="Max Upload Rate" aria-label="Max Upload Rate">
+              </div>
+            </div>
+            <div class="col-sm-6">
+             <div class="input-group">
+                <div class="input-group-text">Slot Allocation</div>
+                <input type="text" name="slot_alloc" class="form-control" placeholder="Slot Allocation" aria-label="Slot Allocation">
+             </div>
+            </div>
+          </div>
+          <!-- <div class="row g-3 m-3">
+            <div class="col-sm">
+             <div class="input-group">
+                <div class="input-group-text">Slot Allocation</div>
+                <input type="text" name="slot_alloc" class="form-control" placeholder="Page refresh interval" aria-label="Page refresh interval">
+             </div>
+            </div>
+          </div> -->
+      <!--     <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
 			 background-color:#ffffff;
@@ -500,11 +567,36 @@
                 style=" border-top-left-radius:0px;
                         border-bottom-left-radius:0px;
                         width: 100px" name="slot_alloc">
-          </div></p>
+          </div></p> -->
 
-          <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">CONNECTION SETTINGS</b>
+          <!-- <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">CONNECTION SETTINGS</b> -->
+          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+    			  <h5 class="">Connection Settings</h5>
+		      </div>
+          <div class="row g-3 m-3">
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">Max total connections</div>
+                <input type="text" name="max_conn_total" class="form-control" placeholder="Max total connections" aria-label="Max total connections">
+            </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">Max sources per file</div>
+                <input type="text" name="max_file_src" class="form-control" placeholder="Max sources per file" aria-label="Max sources per file">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="autoconn_en" id="autoc" autocomplete="off">
+              <label class="btn btn-outline-primary" for="autoc">Autoconnect at startup</label>
+            </div>
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="reconn_en" id="reconn" autocomplete="off">
+              <label class="btn btn-outline-primary" for="reconn">Reconnect when connection lost</label>
+            </div>
+          </div>
 
-          <div class="btn-group form-inline">
+    <!--       <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
                        background-color:#ffffff;
@@ -563,11 +655,31 @@
                 style=" border-top-left-radius:0px;
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
-          </div></p>
+          </div></p> -->
 
-          <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">CONNECTION SETTINGS</b>
-
-          <div class="btn-group form-inline">
+          <!-- <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">CONNECTION SETTINGS</b> -->
+          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+    			  <h5 class="">Port Settings</h5>
+		      </div>
+          <div class="row g-3 m-3">
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">TCP Port</div>
+                <input type="text" name="tcp_port" class="form-control" placeholder="TCP Port" aria-label="TCP Port">
+            </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">UDP Port</div>
+                <input type="text" name="udp_port" class="form-control" placeholder="UDP Port" aria-label="UDP Port">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="udp_dis" id="dis_udp" autocomplete="off">
+              <label class="btn btn-outline-primary" for="dis_udp">Disable UDP connections</label>
+            </div>
+          </div>
+         <!--  <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
                        background-color:#ffffff;
@@ -611,11 +723,27 @@
                 style=" border-top-left-radius:0px;
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
-          </div></p>
+          </div></p> -->
 
-        <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">LINE CAPACITY (STATISTICS)</b>
-
-          <div class="btn-group form-inline">
+        <!-- <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">LINE CAPACITY (STATISTICS)</b> -->
+        <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+    			<h5 class="">Line Capacity (Statistics)</h5>
+		    </div>
+        <div class="row g-3 m-3">
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">Max download rate</div>
+                <input type="text" name="max_line_down_cap" class="form-control" placeholder="Max download rate" aria-label="Max download rate">
+            </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <div class="input-group-text">Max upload rate</div>
+                <input type="text" name="max_line_up_cap" class="form-control" placeholder="Max upload rate" aria-label="Max upload rate">
+              </div>
+            </div>
+          </div>
+          <!-- <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
                        background-color:#ffffff;
@@ -644,11 +772,65 @@
                 style=" border-top-left-radius:0px;
                         border-bottom-left-radius:0px;
                         width: 100px" name="max_line_up_cap">
-          </div></p>
+          </div></p> -->
 
-          <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">FILE SETTINGS</b>
+          <!-- <p><b style="font-size:16px; width:550px;background-color:#319a9b;color:cfd8dc" class="form-control">FILE SETTINGS</b> -->
+          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+    			  <h5 class="">File Settings</h5>
+		      </div>
+          <div class="row g-3 m-3">
+            
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input type="checkbox" class="btn-check" name="check_free_space" id="check_free_space" autocomplete="off" onclick="javascript:toggleStatus('check_free_space','min_free_space')">
+                <label class="btn btn-outline-primary" for="check_free_space">Check free minimum space (MB)</label>
+                <input type="text" name="min_free_space" class="form-control" placeholder="Free minimum space (MB)" aria-label="Free minimum space (MB)">
+              </div>
+            </div>
+            
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="new_files_auto_dl_prio" id="new_files_auto_dl_prio" autocomplete="off">
+              <label class="btn btn-outline-primary" for="new_files_auto_dl_prio">Added download with auto priority</label>
+            </div>
 
-          <div class="btn-group form-inline">
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="new_files_auto_ul_prio" id="new_files_auto_ul_prio" autocomplete="off">
+              <label class="btn btn-outline-primary" for="new_files_auto_ul_prio">New shared files with auto priority</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="ich_en" id="ich_en" autocomplete="off">
+              <label class="btn btn-outline-primary" for="ich_en">I.C.H. active</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="aich_trust" id="aich_trust" autocomplete="off">
+              <label class="btn btn-outline-primary" for="aich_trust">AICH trusts every hash (not recommended)</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="alloc_full_chunks" id="alloc_full_chunks" autocomplete="off">
+              <label class="btn btn-outline-primary" for="alloc_full_chunks">Alloc full chunks for <code>.part</code> files</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="alloc_full" id="alloc_full" autocomplete="off">
+              <label class="btn btn-outline-primary" for="alloc_full">Alloc full disk space for <code>.part</code> files</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="new_files_paused" id="new_files_paused" autocomplete="off">
+              <label class="btn btn-outline-primary" for="new_files_paused">Add files to download in pause</label>
+            </div>
+
+            <div class="col-sm-6">
+              <input type="checkbox" class="btn-check" name="extract_metadata" id="extract_metadata" autocomplete="off">
+              <label class="btn btn-outline-primary" for="extract_metadata">Extract MetaData tags</label>
+            </div>
+
+          </div>
+
+          <!-- <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
                        background-color:#ffffff;
@@ -664,6 +846,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" name="min_free_space">
           </div>
+
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -679,6 +862,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
           </div>
+
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -694,6 +878,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
           </div>
+          
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -709,6 +894,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
           </div>
+
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -724,6 +910,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
           </div>
+
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -739,6 +926,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
           </div>
+
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -754,6 +942,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
           </div>
+
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -769,6 +958,7 @@
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
           </div>
+
           <div class="btn-group form-inline">
             <label class="form-control btn-group"
               style=" width:450px;
@@ -783,12 +973,12 @@
                 style=" border-top-left-radius:0px;
                         border-bottom-left-radius:0px;
                         width: 100px" disabled="true" name="nothing">
-          </div></p>
+          </div></p> -->
 
-        </div>
+        <!-- </div> -->
 
 
-      </div>
+      <!-- </div> -->
     </div>
     </form>
 
