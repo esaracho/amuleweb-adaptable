@@ -423,8 +423,10 @@
       <div class="shadow container-lg g-0 pb-3">
 		  	<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
 	     		<div class="row">
-	  				<div class="col-sm-6 col-md-2 col-xl-1"><h5 class="">Settings</h5></div>
-	  				<div class="col-sm-6 col-md-10 col-xl-11">
+	  				<div class="col-3 col-md-2 col-xl-1">
+              <h5 class="">Settings</h5>
+            </div>
+	  				<div class="col-9 col-md-10 col-xl-11">
           <?php
               if ($_SESSION["guest_login"] == 0) {
                 echo '<input class="btn btn-outline-light" type="submit" name="Submit" value="Apply">';
@@ -779,14 +781,24 @@
     			  <h5 class="">File Settings</h5>
 		      </div>
           <div class="row g-3 m-3">
-            
+
             <div class="col-sm-6">
               <div class="input-group">
-                <input type="checkbox" class="btn-check" name="check_free_space" id="check_free_space" autocomplete="off" onclick="javascript:toggleStatus('check_free_space','min_free_space')">
-                <label class="btn btn-outline-primary" for="check_free_space">Check free minimum space (MB)</label>
-                <input type="text" name="min_free_space" class="form-control" placeholder="Free minimum space (MB)" aria-label="Free minimum space (MB)">
+                  <div class="input-group-text p-0">
+                    <input type="checkbox" class="btn-check" name="check_free_space" id="check_free_space" autocomplete="off" onclick="javascript:toggleStatus('check_free_space','min_free_space')">
+                    <label class="btn btn-outline-primary rounded-0 rounded-start" for="check_free_space">Check free minimum space (MB)</label>
+                </div>
+                  <input type="text" name="min_free_space" class="form-control" placeholder="Free minimum space (MB)" aria-label="Free minimum space (MB)">
+                <!-- <input type="text" name="min_free_space" class="form-control" placeholder="Free minimum space (MB)" aria-label="Free minimum space (MB)"> -->
               </div>
             </div>
+            <!-- <div class="col-sm-3"> -->
+              <!-- <div class="input-group"> -->
+                <!-- <input type="checkbox" class="btn-check" name="check_free_space" id="check_free_space" autocomplete="off" onclick="javascript:toggleStatus('check_free_space','min_free_space')">
+                <label class="btn btn-outline-primary" for="check_free_space">Check free minimum space (MB)</label> -->
+                
+              <!-- </div> -->
+            <!-- </div> -->
             
             <div class="col-sm-6">
               <input type="checkbox" class="btn-check" name="new_files_auto_dl_prio" id="new_files_auto_dl_prio" autocomplete="off">
