@@ -506,13 +506,13 @@
             </div>
             <div class="col-sm-6">
               <div class="input-group">
-                <div class="input-group-text">Max Upload Rate</div>
+                <div class="input-group-text">Max upload rate</div>
                 <input type="text" name="max_up_limit" class="form-control" placeholder="Max Upload Rate" aria-label="Max Upload Rate">
               </div>
             </div>
             <div class="col-sm-6">
              <div class="input-group">
-                <div class="input-group-text">Slot Allocation</div>
+                <div class="input-group-text">Slot allocation</div>
                 <input type="text" name="slot_alloc" class="form-control" placeholder="Slot Allocation" aria-label="Slot Allocation">
              </div>
             </div>

@@ -194,14 +194,14 @@
 			</div>
 			<div class="table-responsive">
 			<table class="table">
-				<thead>
+				<thead class="table-light">
 					<tr>
 						<!-- <th scope="col">Conn</th> -->
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=name">Server name&diams;</a></th>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=desc">Description&diams;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=name">Server&nbsp;name&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=desc">Description&nbsp;&darr;&uarr;</a></th>
 						<!-- <th scope="col">Address</th> -->
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=users">Users&diams;</a></th>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=files">Files&diams;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=users">Users&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-servers.php?sort=files">Files&nbsp;&darr;&uarr;</a></th>
 					</tr>
 				</thead>
 				<tbody>

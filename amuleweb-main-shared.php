@@ -171,13 +171,14 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=name">File name&diams;</a></th>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=size">Size&diams;</a></th>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=xfer">Up&diams;</a> <a class="text-decoration-none text-muted" href="amuleweb-main-shared.php?sort=xfer_all"> Total&diams;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=name">File&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=size">Size&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=xfer">Up&nbsp;sess&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=xfer_all">Up&nbsp;total&nbsp;&darr;&uarr;</a></th>
 						<!-- <th scope="col"><a href="amuleweb-main-shared.php?sort=req">Requested</a> <a href="amuleweb-main-shared.php?sort=req_all">(Total)</a></th>
 						<th scope="col"><a href="amuleweb-main-shared.php?sort=acc">Accepted Rqst</a> <a href="amuleweb-main-shared.php?sort=acc_all">(Total)</a></th> -->
 						<th scope="col"><span>Ratio</span></th>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=prio">Priority&diams;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=prio">Priority&nbsp;&darr;&uarr;</a></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -311,12 +312,13 @@
 
 							echo '<tr scope="row">';
 							echo '<td >', '<div class="form-check" style="margin: 0px;"><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;', $file->name, "</div></td>";
-							echo '<td >', CastToXBytes($file->size), "</td>";
-							echo '<td >', CastToXBytes($file->xfer), " (", CastToXBytes($file->xfer_all),")" ,"</td>";
-							echo '<td >', $ratio, "</td>";
+							echo '<td >', CastToXBytes($file->size), '</td>';
+							echo '<td >', CastToXBytes($file->xfer), '</td>';
+							echo '<td >', CastToXBytes($file->xfer_all), '</td>';
+							echo '<td >', $ratio, '</td>';
 							/* echo '<td >', $file->req, " (", $file->req_all, ")</td>";
 							echo '<td >', $file->accept, " (", $file->accept_all, ")</td>"; */
-							echo '<td >', PrioString($file), "</td>";
+							echo '<td >', PrioString($file), '</td>';
 							echo '</tr>';
 						}
 					} else {
