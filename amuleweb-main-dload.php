@@ -232,19 +232,19 @@
 	<div class="shadow container-lg g-0">
 		<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
 			<div class="row align-items-center">
-			<div class="col-sm-6 col-md-2 col-xl-1"><h5 class="">Downloads</h5></div>
-			<div class="col-sm-6 col-md-10 col-xl-11">
-			<div class="btn-group me-2" role="group">
-				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('pause');" role="button">Pause</a>
-				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('resume');" role="button">Resume</a>
-				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('cancel');" role="button">Remove</a>
-			</div>
-			<div class="btn-group" role="group">
-				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">- prio</a>
-				<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">+ prio</a>
-			</div>
-			</div>
-			</div>
+				<div class="col-12 col-sm-12 col-md-2 col-xl-1"><h5 class="">Downloads</h5></div>
+				<div class="col-12 col-sm-12 col-md-10 col-xl-11">
+					<div class="btn-group me-2 mb-2" role="group">
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('pause');" role="button">Pause</a>
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('resume');" role="button">Resume</a>
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('cancel');" role="button">Remove</a>
+					</div>
+					<div class="btn-group mb-2" role="group">
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">- prio</a>
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">+ prio</a>
+					</div>
+				</div>
+		</div>
 		</div>
 				<?php
 					function CastToXBytes($size, &$count) {
@@ -410,15 +410,29 @@
 							echo "<div class='card'>";
 							echo "<div class='card-body'>";
 							echo "<input type='checkbox' class='form-check-input me-2' name='", ($file->hash), "'>";
+							//File name
 							echo "<h5 class='card-title d-inline'>", ($file->name), "</h5><div class='d-block'></div>";
-							
-							
+							//Size - Completed
 							echo "<span class='text-success'>&darr; ", CastToXBytes($file->size_done, $countCompleted), "</span>";
 							echo "<span> of </span>";
 							echo "<span class='text-primary'>", CastToXBytes($file->size, $countSize), "</span>";
 							//echo "<span> / ", ($countCompleted*100)/($countSize), "%</span>";
 							echo "<span> / ", ($file->size_done*100)/($file->size), "%</span>";
+							//Sources
+							echo "<span> | 	&harr; ";
+							if ( $file->src_count_not_curr != 0 ) {
+								echo $file->src_count - $file->src_count_not_curr, " / ";
+							}
+							echo $file->src_count, " ( ", $file->src_count_xfer, " ) ";
+							if ( $file->src_count_a4af != 0 ) {
+								echo "+ ", $file->src_count_a4af;
+							}
+							echo "</span>";
+							//Priority
+							echo "<span> | " , PrioString($file), "</span>";
+							//Status
 							echo "<span> | " , StatusString($file), " | </span>";
+							//Speed
 							echo "<span>", ($file->speed > 0) ? (CastToXBytes($file->speed, $countSpeed) . "/s") : "0 b/s","</span>";
 							
 							echo  "</div>";

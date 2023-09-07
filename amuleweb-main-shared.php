@@ -153,9 +153,9 @@
 		<div class="shadow container-lg g-0">
 			<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
 				<div class="row align-items-center">
-					<div class="col-sm-6 col-md-2 col-xl-1"><h5 class="">Shared</h5></div>
-					<div class="col-sm-6 col-md-10 col-xl-11">
-						<div class="btn-group me-2" role="group">
+					<div class="col-3 col-sm-6 col-md-1 col-xl-auto"><h5 class="">Shared</h5></div>
+					<div class="col-9 col-sm-6 col-md-11 col-xl-11">
+						<div class="btn-group mb-2" role="group">
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">- prio</a>
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('reload');" role="button">Refresh</a>
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">+ prio</a>

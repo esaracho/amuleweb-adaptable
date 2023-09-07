@@ -422,16 +422,16 @@
 
       <div class="shadow container-lg g-0 pb-3">
 		  	<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
-	     		<div class="row">
-	  				<div class="col-3 col-md-2 col-xl-1">
+	     		<div class="row align-items-center">
+	  				<div class="col-3 col-md-1 col-xl-auto">
               <h5 class="">Settings</h5>
             </div>
-	  				<div class="col-9 col-md-10 col-xl-11">
+	  				<div class="col-9 col-md-11 col-xl-11">
           <?php
               if ($_SESSION["guest_login"] == 0) {
-                echo '<input class="btn btn-outline-light" type="submit" name="Submit" value="Apply">';
+                echo '<input class="btn btn-outline-light mb-2" type="submit" name="Submit" value="Apply" role="button">';
               } else {
-                echo '<input class="btn btn-outline-light" type="submit" name="Submit" value="Apply" disabled>';
+                echo '<input class="btn btn-outline-light mb-1" type="submit" name="Submit" value="Apply" disabled>';
                 echo '<br><br><span class="label label-warning">You logged in as guest - commands are disabled</span>';
               }
             ?>
