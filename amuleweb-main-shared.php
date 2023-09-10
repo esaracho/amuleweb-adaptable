@@ -21,7 +21,7 @@
 		frm.command.value=command
 		frm.submit()
 		}
-</script>
+	</script>
 
 </head>
 
@@ -120,7 +120,7 @@
 			    		$ed2k = "Connecting ...";
 			    		$ed2k_status = "bg-info text-dark";
 			    	} else {
-			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)"); //. " " . $stats["serv_name"] . " " . $stats["serv_addr"];
+			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)");
 			    		$ed2k_status = (($stats["id"] < 16777216) ? "bg-warning text-dark" : "bg-success");
 			    	}
 			    	if ( $stats["kad_connected"] == 1 ) {
@@ -146,8 +146,6 @@
 		</div>
 	</div>
 	
-	<!-- Center table -->
-	<!-- <div class="container-fluid panel-tr"> -->
 	<form name="mainform" action="amuleweb-main-shared.php" method="post">
 		<input type="hidden" name="command">
 		<div class="shadow container-lg g-0">
@@ -165,19 +163,15 @@
 			</div>
 
 		<!-- Table Download -->
-		<!-- <div class="panel" style="margin-bottom: 60px;">
-		<div class="panel-heading panel-center"><h4>SHARED FILES</h4></div> -->
 		<div class="table-responsive">
 			<table class="table">
-				<thead>
+				<thead class="table-light">
 					<tr>
 						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=name">File&nbsp;&darr;&uarr;</a></th>
 						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=size">Size&nbsp;&darr;&uarr;</a></th>
 						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=xfer">Up&nbsp;sess&nbsp;&darr;&uarr;</a></th>
 						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=xfer_all">Up&nbsp;total&nbsp;&darr;&uarr;</a></th>
-						<!-- <th scope="col"><a href="amuleweb-main-shared.php?sort=req">Requested</a> <a href="amuleweb-main-shared.php?sort=req_all">(Total)</a></th>
-						<th scope="col"><a href="amuleweb-main-shared.php?sort=acc">Accepted Rqst</a> <a href="amuleweb-main-shared.php?sort=acc_all">(Total)</a></th> -->
-						<th scope="col"><span>Ratio</span></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=ratio">Ratio&nbsp;&darr;&uarr;</a></th>
 						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=prio">Priority&nbsp;&darr;&uarr;</a></th>
 					</tr>
 				</thead>
@@ -221,20 +215,21 @@
 
 					function PrioString($file) {
 						$prionames = array(0 => "Low", 1 => "Normal", 2 => "High",
-							3 => "Very high", 4 => "Very low", 5=> "Auto", 6 => "Release");
-						$result = $prionames[$file->prio];
-						if ( $file->prio_auto == 1) {
+							3 => "Very high", 4 => "Very low", 5=> "Auto", 6 => "Powershare");
+						$result = $prionames[$file['prio']];
+						if ( $file['prio_auto'] == 1) {
 							$result = $result . "&nbsp(auto)";
 						}
 						return $result;
 					}
 
-					function PrioStringSorter($file) {
-						$prionames = array(0 => "Low", 1 => "Normal", 2 => "High",
-							3 => "High", 4 => "Low", 5=> "Normal", 6 => "Release");
-						$result = $prionames[$file->prio];
+					/* function PrioStringSorter($file) {
+						$prionames = array(0 => "Very low", 1 => "Low", 2 => "Normal",
+							3 => "High", 4 => "Very High", 5=> "Auto", 6 => "Release");
+						$result = $prionames[$file['prio']];
+
 						return $result;
-					}
+					} */
 
 					$sort_order;$sort_reverse;
 
@@ -244,15 +239,17 @@
 						//echo '<p>', $sort_reverse,'</p>';
 
 						switch ( $sort_order) {
-							case "size": $result = $a->size > $b->size; break;
-							case "name": $result = $a->name > $b->name; break;
-							case "xfer": $result = $a->xfer > $b->xfer; break;
-							case "xfer_all": $result = $a->xfer_all > $b->xfer_all; break;
-							case "acc": $result = $a->accept > $b->accept; break;
-							case "acc_all": $result = $a->accept_all > $b->accept_all; break;
-							case "req": $result = $a->req > $b->req; break;
-							case "req_all": $result = $a->req_all > $b->req_all; break;
-							case "prio": $result = PrioSort($a) < PrioSort($b); break;
+							case "size": $result = $a['size'] > $b['size']; break;
+							case "name": $result = $a['name'] > $b['name']; break;
+							case "xfer": $result = $a['xfer'] > $b['xfer']; break;
+							case "xfer_all": $result = $a['xfer_all'] > $b['xfer_all']; break;
+							case "ratio": $result = $a['ratio'] > $b['ratio']; break;
+							//case "acc": $result = $a['accept'] > $b['accept']; break;
+							//case "acc_all": $result = $a['accept_all'] > $b['accept_all']; break;
+							//case "req": $result = $a['req'] > $b['req']; break;
+							//case "req_all": $result = $a['req_all'] > $b['req_all']; break;
+							//case "prio": $result = PrioStringSorter($a) > PrioStringSorter($b); break;
+							case "prio": $result = $a['prio'] > $b['prio']; break;
 						}
 
 						if ( $sort_reverse ) {
@@ -282,7 +279,66 @@
 
 					}
 
+					
+
+					/* foreach ($shared as $file) {
+						echo "<p>", $file->size, "</p>";
+					} */
+
+					// $arrayPrueba = $shared[1];
+					// echo "<p>", $arrayPrueba, "</p>";
+					//foreach ((array)$obj as $key => $val) {
+					
+					/* foreach((array)$arrayPrueba as $key => $val) {
+
+						echo "<p>", $key, $val, "</p>";
+				   } */
+
+					/* foreach($shared[0] as $paramName => $value) {
+					  echo "<p>", $paramName, "</p>";
+					}  */
+
 					$shared = amule_load_vars("shared");
+					$sharedFinal = array(0);
+					$index = 0;
+
+					foreach ($shared as $file) {
+
+						$name = $file->name;
+						$short_name = $file->short_name;
+						$hash = $file->hash;
+						$size = $file->size;
+						$link = $file->link;
+						$xfer = $file->xfer;
+						$xfer_all = $file->xfer_all;
+						$req = $file->req;
+						$req_all = $file->req_all;
+						$accept = $file->accept;
+						$accept_all = $file->accept_all;
+						$prio = $file->prio;
+						$prio_auto = $file->prio_auto;
+						$ratio = (float)((float)$xfer_all / (float)$size);
+
+						$sharedFinal[$index] = array("name" => $name, "short_name" => $short_name, "hash" => $hash, "size" => $size, "link" => $link,
+						"xfer" => $xfer, "xfer_all" => $xfer_all, "req" => $req, "req_all" => $req_all, "accept" => $accept, "accept_all" => $accept_all,
+						"prio" => $prio, "prio_auto" => $prio_auto, "ratio" => $ratio);
+
+						++$index;
+
+					}
+					/* $arrayPrueba = array("dato1" => "hola dato 1", "dato2" => "hola dato 2");
+					$arrayPrueba['dato3'] = "hola dato 3";
+					echo "<p>", $arrayPrueba['dato1'], "</p>";
+					echo "<p>", $arrayPrueba['dato2'], "</p>";
+					echo "<p>", $arrayPrueba['dato3'], "</p>"; */
+				/* 	define("variable1","something");
+					// $variable1 = "hola";
+					$arrayPrueba[variable1];
+
+					echo "<p>", $arrayPrueba->variable1, "</p>"; */
+
+
+
 
 					$sort_order = $HTTP_GET_VARS["sort"];
 
@@ -300,24 +356,20 @@
 
 					if ( $sort_order != "" ) {
 						$_SESSION["shared_sort"] = $sort_order;
-						usort(&$shared, "my_cmp");
+						usort(&$sharedFinal, "my_cmp");
 					}
 
 					if ($HTTP_GET_VARS["select"] == "All" || $HTTP_GET_VARS["select"] == "") {
-						foreach ($shared as $file) {
+						foreach ($sharedFinal as $file) {
 
-							$ratio = (float)((float)$file->xfer_all / (float)$file->size);
-							//$ratio_2 = round($ratio, 2);
-							//$archivo = $file->$name;
+							//$ratio = (float)((float)$file->xfer_all / (float)$file->size);
 
 							echo '<tr scope="row">';
-							echo '<td >', '<div class="form-check" style="margin: 0px;"><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;', $file->name, "</div></td>";
-							echo '<td >', CastToXBytes($file->size), '</td>';
-							echo '<td >', CastToXBytes($file->xfer), '</td>';
-							echo '<td >', CastToXBytes($file->xfer_all), '</td>';
-							echo '<td >', $ratio, '</td>';
-							/* echo '<td >', $file->req, " (", $file->req_all, ")</td>";
-							echo '<td >', $file->accept, " (", $file->accept_all, ")</td>"; */
+							echo '<td >', '<div class="form-check" style="margin: 0px;"><input class="form-check-input" type="checkbox" name="', $file['hash'], '" >&nbsp;', $file['name'], "</div></td>";
+							echo '<td >', CastToXBytes($file['size']), '</td>';
+							echo '<td >', CastToXBytes($file['xfer']), '</td>';
+							echo '<td >', CastToXBytes($file['xfer_all']), '</td>';
+							echo '<td >', $file['ratio'], '</td>';
 							echo '<td >', PrioString($file), '</td>';
 							echo '</tr>';
 						}
@@ -368,83 +420,6 @@
 			echo '</div>';
 			?>
 		</div>
-		</form>
-		
-		<!-- </div> -->
-
-		<!-- Footer -->
-<!-- 		<div id="footer">
-			<div class="col-md-1"></div>
-			<div class="col-md-5">
-				<form name="formlink" method="post" class="form-inline" action="amuleweb-main-shared.php" role="form" id="formed2link">
-	    			<div class="btn-group">
-	        			<input class="form-control btn-group" name="ed2klink" type="text" id="ed2klink" placeholder="ed2k:// - Insert link" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; height: 30px;" size="25">
-	        			<select class="form-control btn-group" name="selectcat" id="selectcat" style="height: 30px;">
-	        				        <?php
-							$cats = amule_get_categories();
-							if ( $HTTP_GET_VARS["Submit"] != "" ) {
-								$link = $HTTP_GET_VARS["ed2klink"];
-								$target_cat = $HTTP_GET_VARS["selectcat"];
-								$target_cat_idx = 0;
-
-								foreach($cats as $i => $c) {
-									if ( $target_cat == $c) $target_cat_idx = $i;
-								}
-
-								if ( strlen($link) > 0 ) {
-									$links = split("ed2k://", $link);
-									foreach($links as $linkn) {
-									    amule_do_ed2k_download_cmd("ed2k://" . $linkn, $target_cat_idx);
-									}
-								}
-							}
-
-							foreach($cats as $c) {
-								echo  '<option>', $c, '</option>';
-							}
-						?>
-	        		</select>
-	        		<input class="btn btn-default btn-group" type="submit" name="Submit" value="Download link" onClick="amuleweb-main-dload.php" style="height: 30px;">
-	    		</div>
-	    </form>
-			</div>
-			<div class="col-md-5">
-				<div class="form-inline" style="margin-top:10px;">
-					<?php
-				      	$stats = amule_get_stats();
-				    	if ( $stats["id"] == 0 ) {
-				    		$ed2k = "Not connected";
-				    		$ed2k_status = "danger";
-				    	} elseif ( $stats["id"] == 0xffffffff ) {
-				    		$ed2k = "Connecting ...";
-				    		$ed2k_status = "info";
-				    	} else {
-				    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)") . " " . $stats["serv_name"] . " " . $stats["serv_addr"];
-				    		$ed2k_status = (($stats["id"] < 16777216) ? "warning" : "success");
-				    	}
-				    	if ( $stats["kad_connected"] == 1 ) {
-				    		$kad1 = "Connected";
-							if ( $stats["kad_firewalled"] == 1 ) {
-								$kad2 = "(FW)";
-								$kad_status = "warning";
-							} else {
-								$kad2 = "(OK)";
-								$kad_status = "success";
-							}
-				    	} else {
-				    		$kad1 = "Disconnected";
-				    		$kad2 = "";
-				    		$kad_status = "danger";
-				    	}
-
-				    	echo '<span class="label label-default">ED2k:</span> ';
-				    	echo '<span class="label label-', $ed2k_status, '">', $ed2k, '</span> ';
-				    	echo '<span class="label label-default">KAD:</span> ';
-				    	echo '<span class="label label-', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
-				    ?>
-				</div>
-			</div>
-			<div class="col-md-1"></div>
-		</div> -->
+	</form>
 </body>
 </html>

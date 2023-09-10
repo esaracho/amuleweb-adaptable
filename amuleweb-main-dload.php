@@ -16,9 +16,7 @@
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
 	<link href="/style.css" rel="stylesheet">
-</head>
 
-<body>
 
 	<script>
 	function formCommandSubmit(command)
@@ -44,6 +42,10 @@
 		frm.submit();
 	}
 	</script>
+
+</head>
+
+<body>
 	<!-- Navigation bar :: This part will be common in all the scripts -->
 	<div class="shadow container-lg bg-dark sticky-top">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -190,7 +192,7 @@
     		Inserting filtering php
     			<div class="btn-group">
      			<?php
-    			$all_status = array("all", "Waiting", "Paused", "Downloading");
+    		/* 	$all_status = array("all", "Waiting", "Paused", "Downloading");
  				if ( $HTTP_GET_VARS["command"] == "filter") {
  					$_SESSION["filter_status"] = $HTTP_GET_VARS["status"];
  					$_SESSION["filter_cat"] = $HTTP_GET_VARS["category"];
@@ -210,16 +212,16 @@
 				foreach($cats as $c) {
 					echo (($c == $_SESSION["filter_cat"]) ? '<option selected>' : '<option>'), $c, '</option>';
 				}
-				echo '</select>';
+				echo '</select>'; */
     			?>
     			<a class="btn btn-filter" href="javascript:formCommandSubmit('filter');" title="Filter">
 					<span class="glyphicon glyphicon-filter"></span>
 						<div style="font-size:9px"><br>Filter</div>
 				</a>
     			<?php
-    			if ($_SESSION["guest_login"] != 0) {
+    			/* if ($_SESSION["guest_login"] != 0) {
 				    echo '<br><br><span class="label label-warning">You logged in as guest - commands are disabled</span>';
-				}
+				} */
 				?>
 				</div>
   			</div>
@@ -399,6 +401,12 @@
 						$cat_idx[$c] = $i;
 					}
 
+					/* $cat_list = amule_get_categories();
+					foreach($cat_list as $key => $cat_string) {
+ 						echo "cat = ". $cat_string ."- key = ". $key;
+					}   */
+
+
 					foreach ($downloads as $file) {
 						$filter_status_result = ($_SESSION["filter_status"] == "all") or
 							($_SESSION["filter_status"] == StatusString($file));
@@ -431,9 +439,9 @@
 							//Priority
 							echo "<span> | " , PrioString($file), "</span>";
 							//Status
-							echo "<span> | " , StatusString($file), " | </span>";
+							echo "<span> | " , StatusString($file), "</span>";
 							//Speed
-							echo "<span>", ($file->speed > 0) ? (CastToXBytes($file->speed, $countSpeed) . "/s") : "0 b/s","</span>";
+							echo "<span> | ", ($file->speed > 0) ? (CastToXBytes($file->speed, $countSpeed) . "/s") : "0 b/s","</span>";
 							
 							echo  "</div>";
 							echo "</div>";
