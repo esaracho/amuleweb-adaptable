@@ -155,7 +155,25 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 			</div>
+	<form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
+    	<input type="hidden" name="command" id="comm">
+		<div class="text-bg-dark">
+			<div class="row align-items-center">
+				<div class="col-12 col-sm-12 col-md-2 col-xl-1"><h5 class="">Downloads</h5></div>
+				<div class="col-12 col-sm-12 col-md-10 col-xl-11">
+					<div class="btn-group me-2 mb-2" role="group">
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('pause');" role="button">Pause</a>
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('resume');" role="button">Resume</a>
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('cancel');" role="button">Remove</a>
+					</div>
+					<div class="btn-group mb-2" role="group">
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">- prio</a>
+						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">+ prio</a>
+					</div>
+				</div>
+			</div>
 		</div>
+	</div>
 	
     <!-- Commands -->
    <!--  <form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
@@ -229,25 +247,7 @@
 	</div> -->
 
 	<!-- BEGIN OF CENTRAL BODY -->
-	<form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
-    <input type="hidden" name="command" id="comm">
 	<div class="shadow container-lg g-0">
-		<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
-			<div class="row align-items-center">
-				<div class="col-12 col-sm-12 col-md-2 col-xl-1"><h5 class="">Downloads</h5></div>
-				<div class="col-12 col-sm-12 col-md-10 col-xl-11">
-					<div class="btn-group me-2 mb-2" role="group">
-						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('pause');" role="button">Pause</a>
-						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('resume');" role="button">Resume</a>
-						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('cancel');" role="button">Remove</a>
-					</div>
-					<div class="btn-group mb-2" role="group">
-						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">- prio</a>
-						<a class="btn btn-outline-light" href="javascript:formCommandSubmit('prioup');" role="button">+ prio</a>
-					</div>
-				</div>
-		</div>
-		</div>
 				<?php
 					function CastToXBytes($size, &$count) {
 						$count += $size;

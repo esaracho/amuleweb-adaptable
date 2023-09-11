@@ -2,7 +2,7 @@
 
 <html lang="en">
 <head>
-	<title>aMule | Servers</title>
+	<title>aMule | Settings</title>
 	<?php
 		if ( $_SESSION["auto_refresh"] > 0 ) {
 			echo "<meta http-equiv=\"refresh\" content=\"", $_SESSION["auto_refresh"], '">';
@@ -129,7 +129,7 @@
 <body>
 
   <!-- Navigation bar :: This part will be common in all the scripts -->
-<div class="shadow container-lg bg-dark sticky-top">
+  <div class="shadow container-lg bg-dark sticky-top">
 		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 	    	<a class="navbar-brand" href="#"><img src="logo-nav.png" class="d-inline-block align-middle">aMule Web</a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuColapsable">
@@ -236,14 +236,8 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 		</div>
-	</div>
-
-
-    <!-- Center body -->
     <form name="mainform" action="amuleweb-main-prefs.php" method="post">
-           <!-- Commands -->
-      <div class="shadow container-lg g-0 pb-3">
-		  	<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+		  	<div class="text-bg-dark">
 	     		<div class="row align-items-center">
 	  				<div class="col-3 col-md-1 col-xl-auto">
               <h5 class="">Settings</h5>
@@ -253,19 +247,25 @@
               if ($_SESSION["guest_login"] == 0) {
                 echo '<input class="btn btn-outline-light mb-2" type="submit" name="Submit" value="Apply" role="button">';
               } else {
-                echo '<input class="btn btn-outline-light mb-1" type="submit" name="Submit" value="Apply" disabled>';
+                echo '<input class="btn btn-outline-light mb-2" type="submit" name="Submit" value="Apply" disabled>';
                 echo '<br><br><span class="label label-warning">You logged in as guest - commands are disabled</span>';
               }
             ?>
 	  		  	</div>
   				</div>
         </div>
+	</div>
 
-        <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+
+    <!-- Center body -->
+
+           <!-- Commands -->
+      <div class="shadow container-lg g-0">
+        <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			<h5 class="">Webserver</h5>
 		    </div>
         
-          <div class="row g-3 m-3">
+          <div class="row g-3 p-3">
             <div class="col-sm-6">
               <div class="input-group">
                 <div class="input-group-text">Page refresh interval</div>
@@ -278,10 +278,10 @@
             </div>
           </div>
 
-          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
-    			  <h5 class="">Bandwidth Limits</h5>
+          <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
+    			  <h5 class="">Bandwidth limits</h5>
 		      </div>
-          <div class="row g-3 m-3">
+          <div class="row g-3 p-3">
             <div class="col-sm-6">
               <div class="input-group">
                 <div class="input-group-text">Max download rate</div>
@@ -302,10 +302,10 @@
             </div>
           </div>
           
-          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
-    			  <h5 class="">Connection Settings</h5>
+          <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
+    			  <h5 class="">Connection settings</h5>
 		      </div>
-          <div class="row g-3 m-3">
+          <div class="row g-3 p-3">
             <div class="col-sm-6">
               <div class="input-group">
                 <div class="input-group-text">Max total connections</div>
@@ -328,10 +328,10 @@
             </div>
           </div>
 
-          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
-    			  <h5 class="">Port Settings</h5>
+          <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
+    			  <h5 class="">Port settings</h5>
 		      </div>
-          <div class="row g-3 m-3">
+          <div class="row g-3 p-3">
             <div class="col-sm-6">
               <div class="input-group">
                 <div class="input-group-text">TCP Port</div>
@@ -350,10 +350,10 @@
             </div>
           </div>
          
-        <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
-    			<h5 class="">Line Capacity (Statistics)</h5>
+        <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
+    			<h5 class="">Line capacity (Statistics)</h5>
 		    </div>
-        <div class="row g-3 m-3">
+        <div class="row g-3 p-3">
             <div class="col-sm-6">
               <div class="input-group">
                 <div class="input-group-text">Max download rate</div>
@@ -368,11 +368,10 @@
             </div>
           </div>
          
-          <div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
-    			  <h5 class="">File Settings</h5>
+          <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
+    			  <h5 class="">File settings</h5>
 		      </div>
-          <div class="row g-3 m-3">
-
+          <div class="row g-3 p-3">
             <div class="col-sm-6">
               <div class="input-group">
                   <div class="input-group-text p-0">
@@ -423,7 +422,8 @@
               <label class="btn btn-outline-primary" for="extract_metadata">Extract MetaData tags</label>
             </div>
           </div>
-    </div>
-    </form>
+       </form>
+     </div>
+
 </body>
 </html>

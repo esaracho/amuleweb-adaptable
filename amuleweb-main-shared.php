@@ -144,12 +144,9 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 		</div>
-	</div>
-	
-	<form name="mainform" action="amuleweb-main-shared.php" method="post">
+		<form name="mainform" action="amuleweb-main-shared.php" method="post">
 		<input type="hidden" name="command">
-		<div class="shadow container-lg g-0">
-			<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+			<div class="text-bg-dark">
 				<div class="row align-items-center">
 					<div class="col-3 col-sm-6 col-md-1 col-xl-auto"><h5 class="">Shared</h5></div>
 					<div class="col-9 col-sm-6 col-md-11 col-xl-11">
@@ -161,8 +158,12 @@
 					</div>
 				</div>
 			</div>
+	</div>
+	
+	
 
 		<!-- Table Download -->
+	<div class="shadow container-lg g-0">
 		<div class="table-responsive">
 			<table class="table">
 				<thead class="table-light">

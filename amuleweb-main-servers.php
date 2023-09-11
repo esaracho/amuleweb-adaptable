@@ -148,15 +148,11 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 		</div>
-	</div>
-    	<!-- Center table -->
-		<!-- Table Servers -->
 		<form action="amuleweb-main-servers.php" role= "form" method="post" name="serverform" id="servf">
   			<input type="hidden" name="command" id="comm">
 			<input type="hidden" name="ip" id="serv">
-			<input type="hidden" name="port" id="port">
-		<div class="shadow container-lg g-0">
-			<div class="text-bg-dark px-3 py-3 border-top border-light-subtle">
+			<input type="hidden" name="port" id="port">	
+			<div class="text-bg-dark">
 			<div class="row align-items-center">
 					<div class="col-3 col-sm-6 col-md-1 col-xl-auto"><h5 class="">Servers</h5></div>
 					<div class="col-9 col-sm-6 col-md-11 col-xl-11">
@@ -167,6 +163,10 @@
 					</div>
 				</div>
 			</div>
+	</div>
+    	<!-- Center table -->
+		<!-- Table Servers -->
+		<div class="shadow container-lg g-0">
 			<div class="table-responsive">
 			<table class="table">
 				<thead class="table-light">
