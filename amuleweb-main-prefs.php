@@ -150,12 +150,6 @@
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-servers.php">Servers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-kad.php">Kad</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-stats.php">Stats</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link d-flex active justify-content-end" href="./amuleweb-main-prefs.php">Settings</a>
 					</li>
 					<li class="nav-item">
@@ -236,13 +230,18 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 		</div>
-    <form name="mainform" action="amuleweb-main-prefs.php" method="post">
+	</div>
+
+
+    <!-- Center body -->
+
+      <!-- Commands -->
+      <form name="mainform" action="amuleweb-main-prefs.php" method="post">
+      <div class="shadow container-lg g-0">
 		  	<div class="text-bg-dark">
-	     		<div class="row align-items-center">
-	  				<div class="col-3 col-md-1 col-xl-auto">
-              <h5 class="">Settings</h5>
-            </div>
-	  				<div class="col-9 col-md-11 col-xl-11">
+	     		<div class="row align-items-center g-0 px-3 py-2">
+	  				<div class="col-auto col-md-1 col-xl-auto me-2"><h5 class="">Settings</h5></div>
+	  				<div class="col-8 col-md-11 col-xl-11">
           <?php
               if ($_SESSION["guest_login"] == 0) {
                 echo '<input class="btn btn-outline-light mb-2" type="submit" name="Submit" value="Apply" role="button">';
@@ -254,25 +253,18 @@
 	  		  	</div>
   				</div>
         </div>
-	</div>
-
-
-    <!-- Center body -->
-
-           <!-- Commands -->
-      <div class="shadow container-lg g-0">
         <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			<h5 class="">Webserver</h5>
 		    </div>
         
-          <div class="row g-3 p-3">
-            <div class="col-sm-6">
+          <div class="row align-items-center g-0 p-2">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">Page refresh interval</div>
                 <input type="text" name="autorefresh_time" class="form-control" placeholder="Page refresh interval" aria-label="Page refresh interval">
             </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="use_gzip" id="gzip" autocomplete="off">
               <label class="btn btn-outline-primary" for="gzip">Use gzip compression</label>
             </div>
@@ -281,20 +273,20 @@
           <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			  <h5 class="">Bandwidth limits</h5>
 		      </div>
-          <div class="row g-3 p-3">
-            <div class="col-sm-6">
+          <div class="row align-items-center g-0 p-2">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">Max download rate</div>
                 <input type="text" name="max_down_limit" class="form-control" placeholder="Max download rate" aria-label="Max download rate">
             </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">Max upload rate</div>
                 <input type="text" name="max_up_limit" class="form-control" placeholder="Max Upload Rate" aria-label="Max Upload Rate">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
              <div class="input-group">
                 <div class="input-group-text">Slot allocation</div>
                 <input type="text" name="slot_alloc" class="form-control" placeholder="Slot Allocation" aria-label="Slot Allocation">
@@ -305,24 +297,24 @@
           <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			  <h5 class="">Connection settings</h5>
 		      </div>
-          <div class="row g-3 p-3">
-            <div class="col-sm-6">
+          <div class="row align-items-center g-0 p-2">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">Max total connections</div>
                 <input type="text" name="max_conn_total" class="form-control" placeholder="Max total connections" aria-label="Max total connections">
             </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">Max sources per file</div>
                 <input type="text" name="max_file_src" class="form-control" placeholder="Max sources per file" aria-label="Max sources per file">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="autoconn_en" id="autoc" autocomplete="off">
               <label class="btn btn-outline-primary" for="autoc">Autoconnect at startup</label>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="reconn_en" id="reconn" autocomplete="off">
               <label class="btn btn-outline-primary" for="reconn">Reconnect when connection lost</label>
             </div>
@@ -331,20 +323,20 @@
           <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			  <h5 class="">Port settings</h5>
 		      </div>
-          <div class="row g-3 p-3">
-            <div class="col-sm-6">
+          <div class="row align-items-center g-0 p-2">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">TCP Port</div>
                 <input type="text" name="tcp_port" class="form-control" placeholder="TCP Port" aria-label="TCP Port">
             </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">UDP Port</div>
                 <input type="text" name="udp_port" class="form-control" placeholder="UDP Port" aria-label="UDP Port">
               </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="udp_dis" id="dis_udp" autocomplete="off">
               <label class="btn btn-outline-primary" for="dis_udp">Disable UDP connections</label>
             </div>
@@ -353,14 +345,14 @@
         <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			<h5 class="">Line capacity (Statistics)</h5>
 		    </div>
-        <div class="row g-3 p-3">
-            <div class="col-sm-6">
+        <div class="row align-items-center g-0 p-2">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">Max download rate</div>
                 <input type="text" name="max_line_down_cap" class="form-control" placeholder="Max download rate" aria-label="Max download rate">
             </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                 <div class="input-group-text">Max upload rate</div>
                 <input type="text" name="max_line_up_cap" class="form-control" placeholder="Max upload rate" aria-label="Max upload rate">
@@ -371,8 +363,8 @@
           <div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			  <h5 class="">File settings</h5>
 		      </div>
-          <div class="row g-3 p-3">
-            <div class="col-sm-6">
+          <div class="row align-items-center g-0 p-2">
+            <div class="col-sm-6 p-2">
               <div class="input-group">
                   <div class="input-group-text p-0">
                     <input type="checkbox" class="btn-check" name="check_free_space" id="check_free_space" autocomplete="off" onclick="javascript:toggleStatus('check_free_space','min_free_space')">
@@ -382,42 +374,42 @@
               </div>
             </div>
             
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="new_files_auto_dl_prio" id="new_files_auto_dl_prio" autocomplete="off">
               <label class="btn btn-outline-primary" for="new_files_auto_dl_prio">Added download with auto priority</label>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="new_files_auto_ul_prio" id="new_files_auto_ul_prio" autocomplete="off">
               <label class="btn btn-outline-primary" for="new_files_auto_ul_prio">New shared files with auto priority</label>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="ich_en" id="ich_en" autocomplete="off">
               <label class="btn btn-outline-primary" for="ich_en">I.C.H. active</label>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="aich_trust" id="aich_trust" autocomplete="off">
               <label class="btn btn-outline-primary" for="aich_trust">AICH trusts every hash (not recommended)</label>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="alloc_full_chunks" id="alloc_full_chunks" autocomplete="off">
               <label class="btn btn-outline-primary" for="alloc_full_chunks">Alloc full chunks for <code>.part</code> files</label>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="alloc_full" id="alloc_full" autocomplete="off">
               <label class="btn btn-outline-primary" for="alloc_full">Alloc full disk space for <code>.part</code> files</label>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="new_files_paused" id="new_files_paused" autocomplete="off">
               <label class="btn btn-outline-primary" for="new_files_paused">Add files to download in pause</label>
             </div>
 
-            <div class="col-sm-6">
+            <div class="col-sm-6 p-2">
               <input type="checkbox" class="btn-check" name="extract_metadata" id="extract_metadata" autocomplete="off">
               <label class="btn btn-outline-primary" for="extract_metadata">Extract MetaData tags</label>
             </div>

@@ -40,12 +40,6 @@
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-servers.php">Servers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-kad.php">Kad</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-stats.php">Stats</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-prefs.php">Settings</a>
 					</li>
 					<li class="nav-item">
@@ -126,11 +120,17 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 		</div>
+		
+	</div>
+
+	<div class="shadow container-lg g-0">
 		<div class="text-bg-dark">
-			<div class="row align-items-center">
-				<div class="col-12 col-sm-12 col-md-1 col-xl-auto"><h5 class="">Log</h5></div>
-				<div class="col-12 col-sm-12 col-md-11 col-xl-11">
+			<div class="row align-items-center g-0 px-3 py-2">
+				<div class="col-auto col-sm-12 col-md-1 col-xl-auto me-2"><h5 class="">Log</h5></div>
+				<div class="col-auto col-sm-12 col-md-11 col-xl-auto me-2">
 					<a class="btn btn-outline-light mb-2" href="amuleweb-main-log.php">Refresh</a>
+				</div>
+				<div class="col-8 col-sm-12 col-md-11 col-xl-9">
 					<div class="btn-group mb-2" role="group">
 						<a class="btn btn-outline-light" href="amuleweb-main-log.php?rstlog=1" onclick="return confirm('Do you really want to RESET aMule log?')">Clear&nbsp;aMule&nbsp;Log</a>
 						<a class="btn btn-outline-light" href="amuleweb-main-log.php?rstsrv=1" onclick="return confirm('Do you really want to RESET Server log?')">Clear&nbsp;Server&nbsp;Log</a>
@@ -138,9 +138,6 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="shadow container-lg g-0">
 		<div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     		<h5 class="">Amule log</h5>
 		</div>

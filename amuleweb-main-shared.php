@@ -57,12 +57,6 @@
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-servers.php">Servers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-kad.php">Kad</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-stats.php">Stats</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-prefs.php">Settings</a>
 					</li>
 					<li class="nav-item">
@@ -144,12 +138,18 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 		</div>
+	</div>
+	
+	
+
+		<!-- Table Download -->
 		<form name="mainform" action="amuleweb-main-shared.php" method="post">
 		<input type="hidden" name="command">
+		<div class="shadow container-lg g-0">
 			<div class="text-bg-dark">
-				<div class="row align-items-center">
-					<div class="col-3 col-sm-6 col-md-1 col-xl-auto"><h5 class="">Shared</h5></div>
-					<div class="col-9 col-sm-6 col-md-11 col-xl-11">
+				<div class="row align-items-center g-0 px-3 py-2">
+					<div class="col-auto col-sm-6 col-md-1 col-xl-auto me-2"><h5 class="">Shared</h5></div>
+					<div class="col-8 col-sm-6 col-md-11 col-xl-11">
 						<div class="btn-group mb-2" role="group">
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('priodown');" role="button">- prio</a>
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('reload');" role="button">Refresh</a>
@@ -158,12 +158,7 @@
 					</div>
 				</div>
 			</div>
-	</div>
 	
-	
-
-		<!-- Table Download -->
-	<div class="shadow container-lg g-0">
 		<div class="table-responsive">
 			<table class="table">
 				<thead class="table-light">
@@ -196,11 +191,11 @@
 
 					function StatusString($file) {
 						if ( $file->status == 7 ) {
-							return '<span class="label label-info" style="font-size:12px; padding-top:3.6px;">Paused</span>';
+							return '<span class="label label-info" padding-top:3.6px;">Paused</span>';
 						} elseif ( $file->src_count_xfer > 0 ) {
-							return '<span class="label label-success" style="font-size:12px;">Downloading</span>';
+							return '<span class="label label-success"">Downloading</span>';
 						} else {
-							return '<span class="label label-warning" style="font-size:12px;">Waiting</span>';
+							return '<span class="label label-warning"">Waiting</span>';
 						}
 					}
 
@@ -379,12 +374,12 @@
 							if ($HTTP_GET_VARS["select"] == PrioStringSorter($file)) {
 								echo '<tr>';
 
-								echo '<td style="font-size:12px;">', '<div class="form-check" style="margin: 0px;"><label><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;<b>', $file->name, "</b></label></div></td>";
-								echo '<td style="font-size:12px;">', CastToXBytes($file->xfer), " (", CastToXBytes($file->xfer_all),")</td>";
-								echo '<td style="font-size:12px;">', $file->req, " (", $file->req_all, ")</td>";
-								echo '<td style="font-size:12px;">', $file->accept, " (", $file->accept_all, ")</td>";
-								echo '<td style="font-size:12px;">', CastToXBytes($file->size), "</td>";
-								echo '<td style="font-size:12px;">', PrioString($file), "</td>";;
+								echo '<td">', '<div class="form-check" style="margin: 0px;"><label><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;', $file->name, "</label></div></td>";
+								echo '<td">', CastToXBytes($file->xfer), " (", CastToXBytes($file->xfer_all),")</td>";
+								echo '<td">', $file->req, " (", $file->req_all, ")</td>";
+								echo '<td">', $file->accept, " (", $file->accept_all, ")</td>";
+								echo '<td">', CastToXBytes($file->size), "</td>";
+								echo '<td">', PrioString($file), "</td>";;
 								echo '</tr>';
 							}
 						}

@@ -62,12 +62,6 @@
 						<a class="nav-link d-flex active justify-content-end" href="./amuleweb-main-servers.php">Servers</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-kad.php">Kad</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-stats.php">Stats</a>
-					</li>
-					<li class="nav-item">
 						<a class="nav-link d-flex justify-content-end" href="./amuleweb-main-prefs.php">Settings</a>
 					</li>
 					<li class="nav-item">
@@ -148,14 +142,18 @@
 			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
 			    ?>
 		</div>
+	</div>
+    	<!-- Center table -->
+		<!-- Table Servers -->
 		<form action="amuleweb-main-servers.php" role= "form" method="post" name="serverform" id="servf">
-  			<input type="hidden" name="command" id="comm">
+		<div class="shadow container-lg g-0">
+			<input type="hidden" name="command" id="comm">
 			<input type="hidden" name="ip" id="serv">
 			<input type="hidden" name="port" id="port">	
 			<div class="text-bg-dark">
-			<div class="row align-items-center">
-					<div class="col-3 col-sm-6 col-md-1 col-xl-auto"><h5 class="">Servers</h5></div>
-					<div class="col-9 col-sm-6 col-md-11 col-xl-11">
+				<div class="row align-items-center g-0 px-3 py-2">
+					<div class="col-auto col-sm-6 col-md-1 col-xl-auto me-2"><h5 class="">Servers</h5></div>
+					<div class="col-8 col-sm-6 col-md-11 col-xl-11">
 						<div class="btn-group mb-2" role="group">
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('connect');" role="button">Connect</a>
 							<a class="btn btn-outline-light" href="javascript:formCommandSubmit('disconnect');" role="button">Disconnect</a>
@@ -163,10 +161,6 @@
 					</div>
 				</div>
 			</div>
-	</div>
-    	<!-- Center table -->
-		<!-- Table Servers -->
-		<div class="shadow container-lg g-0">
 			<div class="table-responsive">
 			<table class="table">
 				<thead class="table-light">
