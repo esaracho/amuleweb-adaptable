@@ -142,14 +142,14 @@
     		<h5 class="">Amule log</h5>
 		</div>
 			<?php
-				$amulelog = '<pre class="p-3"><code>' . amule_get_log($HTTP_GET_VARS['rstlog']) . '</code></pre>';
+				$amulelog = '<pre class="p-3 mb-0"><code>' . amule_get_log($HTTP_GET_VARS['rstlog']) . '</code></pre>';
 				echo $amulelog;
 			?>
 		<div class="text-bg-dark px-3 py-2 border-top border-light-subtle">
     			<h5 class="">Server log</h5>
 		</div>
 			<?php
-				$serverlog = '<pre class="p-3"><code>' . amule_get_serverinfo($HTTP_GET_VARS['rstsrv']) . '</code></pre>';
+				$serverlog = '<pre class="p-3 mb-0"><code>' . amule_get_serverinfo($HTTP_GET_VARS['rstsrv']) . '</code></pre>';
 				echo $serverlog;
 			?>
 
