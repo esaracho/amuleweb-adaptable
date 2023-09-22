@@ -180,7 +180,7 @@
 					<div class="input-group mb-2">
 						<div class="input-group-text">MaxSz</div>
                 		<input type="text" name="maxsize" class="form-control" value="10000" aria-label="Max size">
-						<select class="form-select" name="minsizeu">
+						<select class="form-select" name="maxsizeu">
     					<option>Byte</option>
 						<option>KByte</option>
 						<option selected>MByte</option>
@@ -229,9 +229,9 @@
 				<table class="table">
 				<thead class="table-light">
 					<tr>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=name">File name&nbsp;&darr;&uarr;</a></th>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=size">Size&nbsp;&darr;&uarr;</a></th>
-						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-shared.php?sort=sources">Sources&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-search.php?sort=name">File name&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-search.php?sort=size">Size&nbsp;&darr;&uarr;</a></th>
+						<th scope="col"><a class="text-decoration-none text-dark" href="amuleweb-main-search.php?sort=sources">Sources&nbsp;&darr;&uarr;</a></th>
 					</tr>
 				</thead>
 				<tbody>
