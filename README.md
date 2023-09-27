@@ -35,21 +35,22 @@ sudo systemctl start amule-daemon.service
 
 ## Mobile
 
-![login](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/bd13396d-8105-4705-88fa-52f9f46d7c4a) 
+![login](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/f2731ccc-9456-4ca0-91e3-08a8e8c35025)
 
-![menu](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/0645f388-1f1d-462d-b92f-9853f0486a4e)
+![menu](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/8f7c2865-2984-49b6-be64-05bab9b325c8)
 
-![transfer](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/f69ed9c6-bf2a-4e38-88e1-963c55b4a56b)
+![transfer](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/1a85c07b-49f4-4461-bb06-20cb4653c5d6)
 
-![shared](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/ee269c1a-6c54-4be7-ae67-ffe1c389e561)
+![shared](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/74782916-1a01-453f-b7f1-04ee93342681)
 
-![search](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/4249f81c-53a4-45a9-a144-9b07a9dff689)
+![search](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/bf3982c8-2869-4d41-8ae0-da8ab675fd5f)
 
-![servers](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/117b8547-6044-4df9-a295-29c849612dce)
+![servers](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/55fab139-c65e-476a-9b2d-09d094d88244)
 
-![settings](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/afa3dfaa-0ad6-42b9-bee0-c5cce264c8da)
+![settings](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/f11a2047-92a4-4622-b5bb-87f99e5a3f01)
 
-![log](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/fc4cb117-b373-490e-b33a-3aa269f73810)
+![log](https://github.com/esaracho/amuleweb-adaptable/assets/17080020/3f306c76-fa11-45d2-b70a-0c648f415546)
+
 
 ## Desktop
 
