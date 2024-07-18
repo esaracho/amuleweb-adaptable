@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
 <head>
 	<title>aMule - Control Panel - Login</title>
@@ -10,7 +10,6 @@
 			document.login.pass.focus();
 		}
 	</script>
-	<!-- <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"> -->
 	<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
@@ -37,26 +36,4 @@
 
 </body>
 
-<!-- <body class="animated fadeIn" style="animation-duration: 1.5s" onload="login_init();">
-
-    <div class="navbar navbar-fixed-top" role="navigation">
-	    <div class="container">
-	    	<a class="navbar-brand" href="#"><img src="logo-nav-brax.png" class="logo-nav"> aMule WebUI</a>
-	    	<form class="navbar-form navbar-right" role="form" name="login">
-				<div class="form-group">
-			   		<input name="pass" type="password" class="form-control" placeholder="Password" required autofocus>
-			   		<button class="btn btn-primary" type="submit" name="submit" value="Submit">
-			   			<span class="glyphicon glyphicon-log-in" style="color:#ffffff"></span>
-			   		</button>
-		    	</div>
-    		</form>
-    		</div>
-    	</div>
-    </div>
-    <div class="container logo-cont">
-    	<img class="animated rubberBand" style="animation-duration: 1s" src="logo-brax.png" width="400" height="400">
-    	<h1 style="color:#319a9b;">aMule Web Interface</h1>
-    	<p style="color:white;">Welcome!<br>Please login to access the complete interface!</p>
-    </div>
-</body> -->
 </html>
