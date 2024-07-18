@@ -5,11 +5,11 @@
 <head>
 
 	<title>aMule | Transfer</title>
-	<?php
-		if ( $_SESSION["auto_refresh"] > 0 ) {
-			echo "<meta http-equiv=\"refresh\" content=\"", $_SESSION["auto_refresh"], '">';
-		}
-	?>
+	<?php if ($_SESSION["auto_refresh"] > 0) {
+     echo "<meta http-equiv=\"refresh\" content=\"",
+         $_SESSION["auto_refresh"],
+         '">';
+ } ?>
 
 	<meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,12 +28,10 @@
 			}
 		}
 		if ( command != "filter" ) {
-			<?php
-				if ($_SESSION["guest_login"] != 0) {
-						echo 'alert("You logged in as guest - commands are disabled");';
-						echo "return;";
-				}
-			?>
+			<?php if ($_SESSION["guest_login"] != 0) {
+       echo 'alert("You logged in as guest - commands are disabled");';
+       echo "return;";
+   } ?>
 		}
 
 		let input = document.getElementById("comm");
@@ -79,36 +77,41 @@
       		</ul>
 			</div>
     	</nav>
-	
+
 	<!-- Ed2k link -->
 				<form name="formlink" method="post" class="form-inline pb-3" action="amuleweb-main-dload.php" role="form" id="formed2link">
 					<div class="input-group">
 				  		<input type="text" class="form-control" name="ed2klink" id="ed2klink" placeholder="ed2k:// - Insert link">
 				 		<select class="form-select" name="selectcat" id="selectcat">
 			     	   <?php
-						$cats = amule_get_categories();
+            $cats = amule_get_categories();
 
-						if ( $HTTP_GET_VARS["Submit"] != "" ) {
-							$link = $HTTP_GET_VARS["ed2klink"];
-							$target_cat = $HTTP_GET_VARS["selectcat"];
-							$target_cat_idx = 0;
+            if ($HTTP_GET_VARS["Submit"] != "") {
+                $link = $HTTP_GET_VARS["ed2klink"];
+                $target_cat = $HTTP_GET_VARS["selectcat"];
+                $target_cat_idx = 0;
 
-							foreach($cats as $i => $c) {
-								if ( $target_cat == $c) $target_cat_idx = $i;
-							}
+                foreach ($cats as $i => $c) {
+                    if ($target_cat == $c) {
+                        $target_cat_idx = $i;
+                    }
+                }
 
-							if ( strlen($link) > 0 ) {
-								$links = split("ed2k://", $link);
-								foreach($links as $linkn) {
-								    amule_do_ed2k_download_cmd("ed2k://" . $linkn, $target_cat_idx);
-								}
-							}
-						}
+                if (strlen($link) > 0) {
+                    $links = split("ed2k://", $link);
+                    foreach ($links as $linkn) {
+                        amule_do_ed2k_download_cmd(
+                            "ed2k://" . $linkn,
+                            $target_cat_idx
+                        );
+                    }
+                }
+            }
 
-						foreach($cats as $c) {
-							echo  '<option>', $c, '</option>';
-						}
-					?>
+            foreach ($cats as $c) {
+                echo "<option>", $c, "</option>";
+            }
+            ?>
 						</select>
 						<input class="btn btn-outline-light" type="submit" name="Submit" value="Download link">
 				</div>
@@ -117,110 +120,50 @@
 <!-- Status -->
 		<div class="text-bg-dark pb-3">
 				<?php
-			      	$stats = amule_get_stats();
-			    	if ( $stats["id"] == 0 ) {
-			    		$ed2k = "Not connected";
-			    		$ed2k_status = "bg-danger";
-			    	} elseif ( $stats["id"] == 0xffffffff ) {
-			    		$ed2k = "Connecting ...";
-			    		$ed2k_status = "bg-info text-dark";
-			    	} else {
-			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)"); //. " " . $stats["serv_name"] . " " . $stats["serv_addr"];
-			    		$ed2k_status = (($stats["id"] < 16777216) ? "bg-warning text-dark" : "bg-success");
-			    	}
-			    	if ( $stats["kad_connected"] == 1 ) {
-			    		$kad1 = "Connected";
-						if ( $stats["kad_firewalled"] == 1 ) {
-							$kad2 = "(FW)";
-							$kad_status = "bg-warning text-dark";
-						} else {
-							$kad2 = "(OK)";
-							$kad_status = "bg-success";
-						}
-			    	} else {
-			    		$kad1 = "Disconnected";
-			    		$kad2 = "";
-			    		$kad_status = "bg-danger";
-			    	}
+    $stats = amule_get_stats();
+    if ($stats["id"] == 0) {
+        $ed2k = "Not connected";
+        $ed2k_status = "bg-danger";
+    } elseif ($stats["id"] == 0xffffffff) {
+        $ed2k = "Connecting ...";
+        $ed2k_status = "bg-info text-dark";
+    } else {
+        $ed2k = "Connected " . ($stats["id"] < 16777216 ? "(low)" : "(high)"); //. " " . $stats["serv_name"] . " " . $stats["serv_addr"];
+        $ed2k_status =
+            $stats["id"] < 16777216 ? "bg-warning text-dark" : "bg-success";
+    }
+    if ($stats["kad_connected"] == 1) {
+        $kad1 = "Connected";
+        if ($stats["kad_firewalled"] == 1) {
+            $kad2 = "(FW)";
+            $kad_status = "bg-warning text-dark";
+        } else {
+            $kad2 = "(OK)";
+            $kad_status = "bg-success";
+        }
+    } else {
+        $kad1 = "Disconnected";
+        $kad2 = "";
+        $kad_status = "bg-danger";
+    }
 
-			    	echo '<span class="fs-6">ED2k</span> ';
-			    	echo '<span class="badge rounded-pill ', $ed2k_status, '">', $ed2k, '</span>';
-			    	echo '<span class="fs-6">&nbsp;&nbsp;&nbsp;KAD</span> ';
-			    	echo '<span class="badge rounded-pill ', $kad_status, '">', $kad1, ' ', $kad2, '</span>';
-			    ?>
+    echo '<span class="fs-6">ED2k</span> ';
+    echo '<span class="badge rounded-pill ',
+        $ed2k_status,
+        '">',
+        $ed2k,
+        "</span>";
+    echo '<span class="fs-6">&nbsp;&nbsp;&nbsp;KAD</span> ';
+    echo '<span class="badge rounded-pill ',
+        $kad_status,
+        '">',
+        $kad1,
+        " ",
+        $kad2,
+        "</span>";
+    ?>
 			</div>
 	</div>
-	
-    <!-- Commands -->
-   <!--  <form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
-    <input type="hidden" name="command" id="comm"> -->
-<!-- 	  <div class="panel panel-tasks">
-  		<div class="panel-body container panel-center">
-    		<div class="form-inline form-tasks">
-    			<div class="btn-group">
-					<a class="btn btn-primary" href="javascript:formCommandSubmit('pause');" role="button">Pause</a>
-
-    				<a class="btn" href="javascript:formCommandSubmit('pause');" title="Pause">
-						<span class="glyphicon glyphicon-pause"></span>
-						<div style="font-size:9px"><br>Pause</div>
-					</a>
-    				<a class="btn" href="javascript:formCommandSubmit('resume');" title="Resume">
-						<span class="glyphicon glyphicon-play"></span>
-							<div style="font-size:9px"><br>Resume</div>
-					</a>
-    			</div>
-    			<div class="btn-group">
-    				<a class="btn" href="javascript:formCommandSubmit('priodown');" title="Lower priority">
-						<span class="glyphicon glyphicon-download"></span>
-						<div style="font-size:9px"><br>Lower Priority</div>
-					</a>
-    				<a class="btn" href="javascript:formCommandSubmit('cancel');" title="Remove">
-						<span class="glyphicon glyphicon-remove-circle"></span>
-						<div style="font-size:9px"><br>Remove</div>
-					</a>
-    				<a class="btn" href="javascript:formCommandSubmit('prioup');" title="Higher priority">
-						<span class="glyphicon glyphicon-upload"></span>
-						<div style="font-size:9px"><br>High Priority</div>
-					</a>
-    			</div>
-    		Inserting filtering php
-    			<div class="btn-group">
-     			<?php
-    		/* 	$all_status = array("all", "Waiting", "Paused", "Downloading");
- 				if ( $HTTP_GET_VARS["command"] == "filter") {
- 					$_SESSION["filter_status"] = $HTTP_GET_VARS["status"];
- 					$_SESSION["filter_cat"] = $HTTP_GET_VARS["category"];
- 				}
-        		if ( $_SESSION["filter_status"] == '') $_SESSION["filter_status"] = 'all';
-
-        		if ( $_SESSION["filter_cat"] == '') $_SESSION["filter_cat"] = 'all';
-
-        		echo '<select name="status" id="filter" class="form-control btn-group"> ';
-        		foreach ($all_status as $s) {
-        			echo (($s == $_SESSION["filter_status"]) ? '<option selected>' : '<option>'), $s, '</option>';
-        		}
-        		echo '</select>';
-
-        		echo '<select name="category" id="category" class="form-control btn-group">';
-				$cats = amule_get_categories();
-				foreach($cats as $c) {
-					echo (($c == $_SESSION["filter_cat"]) ? '<option selected>' : '<option>'), $c, '</option>';
-				}
-				echo '</select>'; */
-    			?>
-    			<a class="btn btn-filter" href="javascript:formCommandSubmit('filter');" title="Filter">
-					<span class="glyphicon glyphicon-filter"></span>
-						<div style="font-size:9px"><br>Filter</div>
-				</a>
-    			<?php
-    			/* if ($_SESSION["guest_login"] != 0) {
-				    echo '<br><br><span class="label label-warning">You logged in as guest - commands are disabled</span>';
-				} */
-				?>
-				</div>
-  			</div>
-  		</div>
-	</div> -->
 
 	<!-- BEGIN OF CENTRAL BODY -->
 	<form action="amuleweb-main-dload.php" role= "form" method="post" name="mainform" id="mainf">
@@ -242,217 +185,283 @@
 				</div>
 			</div>
 		</div>
-	
+
 				<?php
-					function CastToXBytes($size, &$count) {
-						$count += $size;
-						if ( $size < 1024 ) {
-							$result = $size . " b";
-						} elseif ( $size < 1048576 ) {
-							$result = ($size / 1024.0) . " kb";
-						} elseif ( $size < 1073741824 ) {
-							$result = ($size / 1048576.0) . " mb";
-						} else {
-							$result = ($size / 1073741824.0) . " gb";
-						}
-						return $result;
-					}
+    function CastToXBytes($size, &$count)
+    {
+        $count += $size;
+        if ($size < 1024) {
+            $result = $size . " b";
+        } elseif ($size < 1048576) {
+            $result = $size / 1024.0 . " kb";
+        } elseif ($size < 1073741824) {
+            $result = $size / 1048576.0 . " mb";
+        } else {
+            $result = $size / 1073741824.0 . " gb";
+        }
+        return $result;
+    }
 
-					function StatusString($file) {
-						if ( $file->status == 7 ) {
-							return '<span>Paused</span>';
-						} elseif ( $file->src_count_xfer > 0 ) {
-							return '<span>Downloading</span>';
-						} else {
-							return '<span>Waiting</span>';
-						}
-					}
+    function StatusString($file)
+    {
+        if ($file->status == 7) {
+            return "<span>Paused</span>";
+        } elseif ($file->src_count_xfer > 0) {
+            return "<span>Downloading</span>";
+        } else {
+            return "<span>Waiting</span>";
+        }
+    }
 
-					function StatusCode($file) {
-						if ( $file->status == 7 ) {
-							return 1; // Paused
-						} elseif ( $file->src_count_xfer > 0 ) {
-							return 0; // downloading
-						} else {
-							return -1; // waiting
-						}
-					}
+    function StatusCode($file)
+    {
+        if ($file->status == 7) {
+            return 1; // Paused
+        } elseif ($file->src_count_xfer > 0) {
+            return 0; // downloading
+        } else {
+            return -1; // waiting
+        }
+    }
 
-					function PrioString($file) {
-						$prionames = array(0 => "Low", 1 => "Normal", 2 => "High",
-							3 => "Very high", 4 => "Very low", 5=> "Auto", 6 => "Release");
-						$result = $prionames[$file->prio];
-						if ( $file->prio_auto == 1) {
-							$result = $result . "&nbsp(auto)";
-						}
-						return $result;
-					}
+    function PrioString($file)
+    {
+        $prionames = [
+            0 => "Low",
+            1 => "Normal",
+            2 => "High",
+            3 => "Very high",
+            4 => "Very low",
+            5 => "Auto",
+            6 => "Release",
+        ];
+        $result = $prionames[$file->prio];
+        if ($file->prio_auto == 1) {
+            $result = $result . "&nbsp(auto)";
+        }
+        return $result;
+    }
 
-					//
-					// declare it here, before any function reffered it in "global"
-					//
-					$sort_order; $sort_reverse;
+    //
+    // declare it here, before any function reffered it in "global"
+    //
+    $sort_order;
+    $sort_reverse;
 
-					function my_cmp($a, $b)	{
-						global $sort_order, $sort_reverse;
+    function my_cmp($a, $b)
+    {
+        global $sort_order, $sort_reverse;
 
-						switch ( $sort_order) {
-							case "size": $result = $a->size > $b->size; break;
-							case "size_done": $result = $a->size_done > $b->size_done; break;
-							case "progress": $result = (((float)$a->size_done)/((float)$a->size)) > (((float)$b->size_done)/((float)$b->size)); break;
-							case "name": $result = $a->name > $b->name; break;
-							case "speed": $result = $a->speed > $b->speed; break;
-							case "scrcount": $result = $a->src_count > $b->src_count; break;
-							case "status": $result = StatusString($a) > StatusString($b); break;
-							case "prio": $result = $a->prio < $b->prio; break;
-						}
+        switch ($sort_order) {
+            case "size":
+                $result = $a->size > $b->size;
+                break;
+            case "size_done":
+                $result = $a->size_done > $b->size_done;
+                break;
+            case "progress":
+                $result =
+                    ((float) $a->size_done) / ((float) $a->size) >
+                    ((float) $b->size_done) / ((float) $b->size);
+                break;
+            case "name":
+                $result = $a->name > $b->name;
+                break;
+            case "speed":
+                $result = $a->speed > $b->speed;
+                break;
+            case "scrcount":
+                $result = $a->src_count > $b->src_count;
+                break;
+            case "status":
+                $result = StatusString($a) > StatusString($b);
+                break;
+            case "prio":
+                $result = $a->prio < $b->prio;
+                break;
+        }
 
-						if ( $sort_reverse ) {
-							$result = !$result;
-						}
-						//var_dump($sort_reverse);
-						return $result;
-					}
+        if ($sort_reverse) {
+            $result = !$result;
+        }
+        return $result;
+    }
 
-					function create_prg_bar($file) {
+    function create_prg_bar($file)
+    {
+        $done = ((float) $file->size_done * 100) / ((float) $file->size);
+        $status = StatusCode($file);
 
-						$done = ((float)$file->size_done*100)/((float)$file->size);
-						$status = StatusCode($file);
-
-						switch (StatusCode($file)) {
-							case -1: // waiting
-								$status = 'class="progress-bar progress-bar-warning"';
-								break;
-							case 0: // downloading
-								$status = 'class="progress-bar progress-bar-info"';
-								break;
-							case 1: // paused
-								$status ='class="progress-bar progress-bar-info"';
-								break;
-							default: // paused
-								$status ='class="progress-bar progress-bar-danger"';
-								break;
-						}
-						echo '	<div class="progress" style="margin: 0px;"
+        switch (StatusCode($file)) {
+            case -1: // waiting
+                $status = 'class="progress-bar progress-bar-warning"';
+                break;
+            case 0: // downloading
+                $status = 'class="progress-bar progress-bar-info"';
+                break;
+            case 1: // paused
+                $status = 'class="progress-bar progress-bar-info"';
+                break;
+            default:
+                // paused
+                $status = 'class="progress-bar progress-bar-danger"';
+                break;
+        }
+        echo '	<div class="progress" style="margin: 0px;"
 						            data-toggle="popover" data-placement="bottom" data-title="Segments"
-								    data-html="true" data-trigger="hover" data-content='. "'" . $file->progress . "'" . '>
-								    <div '.$status.' role="progressbar" aria-valuenow="'.$done.'" aria-valuemin="0" aria-valuemax="100" style="width: '.$done.'%"></div>
+								    data-html="true" data-trigger="hover" data-content=' .
+            "'" .
+            $file->progress .
+            "'" .
+            '>
+								    <div ' .
+            $status .
+            ' role="progressbar" aria-valuenow="' .
+            $done .
+            '" aria-valuemin="0" aria-valuemax="100" style="width: ' .
+            $done .
+            '%"></div>
 								</div>';
-					}
-					function create_tooltip($name) {
-						echo '	<div class="texte" style="margin: 0px;"
+    }
+    function create_tooltip($name)
+    {
+        echo '	<div class="texte" style="margin: 0px;"
 									data-toggle="popoverTooltip" data-placement="bottom"
 									data-html="true" data-trigger="hover" >
-									<b>&nbsp;'. $name .'</b>
-								
+									<b>&nbsp;' .
+            $name .
+            '</b>
+
 								</div>
-								<div class="popper-content hide">&nbsp;'. $name .'</div>';
-					}
-					// perform command before processing content
-					if ( ($HTTP_GET_VARS["command"] != "") && ($_SESSION["guest_login"] == 0) ) {
-						foreach ( $HTTP_GET_VARS as $name => $val) {
-							// this is file checkboxes
-							if ( (strlen($name) == 32) and ($val == "on") ) {
-								//var_dump($name);
-								amule_do_download_cmd($name, $HTTP_GET_VARS["command"]);
-							}
-						}
-						// check "filter-by-status" settings
-						if ( $HTTP_GET_VARS["command"] == "filter") {
-							//var_dump($_SESSION);
-							$_SESSION["filter_status"] = $HTTP_GET_VARS["status"];
-							$_SESSION["filter_cat"] = $HTTP_GET_VARS["category"];
-						}
-					}
-					if ( $_SESSION["filter_status"] == "") $_SESSION["filter_status"] = "all";
-					if ( $_SESSION["filter_cat"] == "") $_SESSION["filter_cat"] = "all";
-					$countSize = 0;
-					$countCompleted = 0;
-					$countSpeed = 0;
-					$downloads = amule_load_vars("downloads");
-					$fakevar=0;
-					$sort_order = $HTTP_GET_VARS["sort"];
+								<div class="popper-content hide">&nbsp;' .
+            $name .
+            "</div>";
+    }
+    // perform command before processing content
+    if ($HTTP_GET_VARS["command"] != "" && $_SESSION["guest_login"] == 0) {
+        foreach ($HTTP_GET_VARS as $name => $val) {
+            // this is file checkboxes
+            if (strlen($name) == 32 and $val == "on") {
+                amule_do_download_cmd($name, $HTTP_GET_VARS["command"]);
+            }
+        }
+        // check "filter-by-status" settings
+        if ($HTTP_GET_VARS["command"] == "filter") {
+            $_SESSION["filter_status"] = $HTTP_GET_VARS["status"];
+            $_SESSION["filter_cat"] = $HTTP_GET_VARS["category"];
+        }
+    }
+    if ($_SESSION["filter_status"] == "") {
+        $_SESSION["filter_status"] = "all";
+    }
+    if ($_SESSION["filter_cat"] == "") {
+        $_SESSION["filter_cat"] = "all";
+    }
+    $countSize = 0;
+    $countCompleted = 0;
+    $countSpeed = 0;
+    $downloads = amule_load_vars("downloads");
+    $fakevar = 0;
+    $sort_order = $HTTP_GET_VARS["sort"];
 
-					if ( $sort_order == "" ) {
-						$sort_order = $_SESSION["download_sort"];
-					} else {
-						if ( $_SESSION["download_sort_reverse"] == "" ) {
-							$_SESSION["download_sort_reverse"] = 0;
-						} else {
-							if ( $HTTP_GET_VARS["sort"] != '') {
-								$_SESSION["download_sort_reverse"] = !$_SESSION["download_sort_reverse"];
-							}
-						}
-					}
-					//var_dump($_SESSION);
-					$sort_reverse = $_SESSION["download_sort_reverse"];
-					if ( $sort_order != "" ) {
-						$_SESSION["download_sort"] = $sort_order;
-						usort(&$downloads, "my_cmp");
-					}
-					// Prepare categories index array
-					$cats = amule_get_categories();
-					foreach($cats as $i => $c) {
-						$cat_idx[$c] = $i;
-					}
+    if ($sort_order == "") {
+        $sort_order = $_SESSION["download_sort"];
+    } else {
+        if ($_SESSION["download_sort_reverse"] == "") {
+            $_SESSION["download_sort_reverse"] = 0;
+        } else {
+            if ($HTTP_GET_VARS["sort"] != "") {
+                $_SESSION["download_sort_reverse"] = !$_SESSION[
+                    "download_sort_reverse"
+                ];
+            }
+        }
+    }
 
-					/* $cat_list = amule_get_categories();
-					foreach($cat_list as $key => $cat_string) {
- 						echo "cat = ". $cat_string ."- key = ". $key;
-					}   */
+    $sort_reverse = $_SESSION["download_sort_reverse"];
+    if ($sort_order != "") {
+        $_SESSION["download_sort"] = $sort_order;
+        usort(&$downloads, "my_cmp");
+    }
+    // Prepare categories index array
+    $cats = amule_get_categories();
+    foreach ($cats as $i => $c) {
+        $cat_idx[$c] = $i;
+    }
 
+    foreach ($downloads as $file) {
+        ($filter_status_result = $_SESSION["filter_status"] == "all") or
+            $_SESSION["filter_status"] == StatusString($file);
 
-					foreach ($downloads as $file) {
-						$filter_status_result = ($_SESSION["filter_status"] == "all") or
-							($_SESSION["filter_status"] == StatusString($file));
+        ($filter_cat_result = $_SESSION["filter_cat"] == "all") or
+            $cat_idx[$_SESSION["filter_cat"]] == $file->category;
 
-						$filter_cat_result = ($_SESSION["filter_cat"] == "all") or
-							($cat_idx[ $_SESSION["filter_cat"] ] == $file->category);
+        if ($filter_status_result and $filter_cat_result) {
+            echo "<div class='card'>";
+            echo "<div class='card-body'>";
+            echo "<input type='checkbox' class='form-check-input me-2' name='",
+                $file->hash,
+                "'>";
+            //File name
+            echo "<h5 class='card-title d-inline'>",
+                $file->name,
+                "</h5><div class='d-block'></div>";
+            //Size - Completed
+            echo "<span class='text-success'>&darr; ",
+                CastToXBytes($file->size_done, $countCompleted),
+                "</span>";
+            echo "<span> of </span>";
+            echo "<span class='text-primary'>",
+                CastToXBytes($file->size, $countSize),
+                "</span>";
+            echo "<span> / ",
+                ($file->size_done * 100) / $file->size,
+                "%</span>";
+            //Sources
+            echo "<span> | 	&harr; ";
+            if ($file->src_count_not_curr != 0) {
+                echo $file->src_count - $file->src_count_not_curr, " / ";
+            }
+            echo $file->src_count, " ( ", $file->src_count_xfer, " ) ";
+            if ($file->src_count_a4af != 0) {
+                echo "+ ", $file->src_count_a4af;
+            }
+            echo "</span>";
+            //Priority
+            echo "<span> | ", PrioString($file), "</span>";
+            //Status
+            echo "<span> | ", StatusString($file), "</span>";
+            //Speed
+            echo "<span> | ",
+                $file->speed > 0
+                    ? CastToXBytes($file->speed, $countSpeed) . "/s"
+                    : "0 b/s",
+                "</span>";
 
-						if ( $filter_status_result and $filter_cat_result) {
-							echo "<div class='card'>";
-							echo "<div class='card-body'>";
-							echo "<input type='checkbox' class='form-check-input me-2' name='", ($file->hash), "'>";
-							//File name
-							echo "<h5 class='card-title d-inline'>", ($file->name), "</h5><div class='d-block'></div>";
-							//Size - Completed
-							echo "<span class='text-success'>&darr; ", CastToXBytes($file->size_done, $countCompleted), "</span>";
-							echo "<span> of </span>";
-							echo "<span class='text-primary'>", CastToXBytes($file->size, $countSize), "</span>";
-							//echo "<span> / ", ($countCompleted*100)/($countSize), "%</span>";
-							echo "<span> / ", ($file->size_done*100)/($file->size), "%</span>";
-							//Sources
-							echo "<span> | 	&harr; ";
-							if ( $file->src_count_not_curr != 0 ) {
-								echo $file->src_count - $file->src_count_not_curr, " / ";
-							}
-							echo $file->src_count, " ( ", $file->src_count_xfer, " ) ";
-							if ( $file->src_count_a4af != 0 ) {
-								echo "+ ", $file->src_count_a4af;
-							}
-							echo "</span>";
-							//Priority
-							echo "<span> | " , PrioString($file), "</span>";
-							//Status
-							echo "<span> | " , StatusString($file), "</span>";
-							//Speed
-							echo "<span> | ", ($file->speed > 0) ? (CastToXBytes($file->speed, $countSpeed) . "/s") : "0 b/s","</span>";
-							
-							echo  "</div>";
-							echo "</div>";
-							
-						}
-					}
-					if (count($downloads)==0) {
-						echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
-						echo "<span>0 Downloads</span>";
-						echo "</div>";
-					} else {
-						echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
-						echo "<span> ", count($downloads), " Downloads | &darr; ", CastToXBytes($countCompleted, $fakevar)," of " , CastToXBytes($countSize, $fakevar) , " | ",($countSpeed > 0) ? (CastToXBytes($countSpeed, $fakevar) . "/s" ) : "0 b/s","</span>";
-						echo "</div>";
-					}
-					?>
+            echo "</div>";
+            echo "</div>";
+        }
+    }
+    if (count($downloads) == 0) {
+        echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
+        echo "<span>0 Downloads</span>";
+        echo "</div>";
+    } else {
+        echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
+        echo "<span> ",
+            count($downloads),
+            " Downloads | &darr; ",
+            CastToXBytes($countCompleted, $fakevar),
+            " of ",
+            CastToXBytes($countSize, $fakevar),
+            " | ",
+            $countSpeed > 0
+                ? CastToXBytes($countSpeed, $fakevar) . "/s"
+                : "0 b/s",
+            "</span>";
+        echo "</div>";
+    }
+    ?>
 			</div>
 		</div>
 	</form>
@@ -461,62 +470,81 @@
     			<h5 class="card-title">Uploads</h5>
 		</div>
 				<?php
-					function CastToXBytes($size, &$count) {
-						$count += $size;
-						if ( $size < 1024 ) {
-							$result = $size . " b";
-						} elseif ( $size < 1048576 ) {
-							$result = ($size / 1024.0) . " kb";
-						} elseif ( $size < 1073741824 ) {
-							$result = ($size / 1048576.0) . " mb";
-						} else {
-							$result = ($size / 1073741824.0) . " gb";
-						}
-						return $result;
-					}
-					function utf8_rawurldecode($raw_url_encoded){
-						$enc = rawurldecode($raw_url_encoded);
-						if(utf8_encode(utf8_decode($enc))==$enc){;
-							return rawurldecode($raw_url_encoded);
-						}else{
-							return utf8_encode(rawurldecode($raw_url_encoded));
-						}
-					}
-					function create_tooltip($name) {
-						echo '	<div class="texte" style="margin: 0px;"
+    function CastToXBytes($size, &$count)
+    {
+        $count += $size;
+        if ($size < 1024) {
+            $result = $size . " b";
+        } elseif ($size < 1048576) {
+            $result = $size / 1024.0 . " kb";
+        } elseif ($size < 1073741824) {
+            $result = $size / 1048576.0 . " mb";
+        } else {
+            $result = $size / 1073741824.0 . " gb";
+        }
+        return $result;
+    }
+    function utf8_rawurldecode($raw_url_encoded)
+    {
+        $enc = rawurldecode($raw_url_encoded);
+        if (utf8_encode(utf8_decode($enc)) == $enc) {
+            return rawurldecode($raw_url_encoded);
+        } else {
+            return utf8_encode(rawurldecode($raw_url_encoded));
+        }
+    }
+    function create_tooltip($name)
+    {
+        echo '	<div class="texte" style="margin: 0px;"
 									data-toggle="popoverTooltip" data-placement="bottom"
 									data-html="true" data-trigger="hover" >
-									<b>&nbsp;'. $name .'</b>
-								
+									<b>&nbsp;' .
+            $name .
+            '</b>
+
 								</div>
-								<div class="popper-content hide">&nbsp;'. $name .'</div>';
-					}
-					$countUploadDimension = 0;
-					// $countDownloadDimension = 0;
-					$countSpeed = 0;
-					$uploads = amule_load_vars("uploads");
-					$fakevar=0;
+								<div class="popper-content hide">&nbsp;' .
+            $name .
+            "</div>";
+    }
+    $countUploadDimension = 0;
+    $countSpeed = 0;
+    $uploads = amule_load_vars("uploads");
+    $fakevar = 0;
 
-					foreach ($uploads as $file) {
-
-						echo "<div class='card'>";
-						echo "<div class='card-body'>";
-						echo "<h5 class='card-title'>", ($file->name), "</h5>";
-						echo "<span class='text-primary'>&uarr; ", CastToXBytes($file->xfer_up, $countUploadDimension),"</span>";
-						echo "<span> | ", ($file->xfer_speed > 0) ? (CastToXBytes($file->xfer_speed, $countSpeed) . "/s") : "0 b/s","</span>";
-						echo  "</div>";
-						echo "</div>";
-					}
-					if (count($uploads)==0) {
-						echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
-						echo "<span>0 Uploads</span>";
-						echo "</div>";
-					} else {
-						echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
-							echo "<span> ", count($uploads) ," Uploads | &uarr; ", CastToXBytes($countUploadDimension, $fakevar), " | ",($countSpeed > 0) ? (CastToXBytes($countSpeed, $fakevar) . "/s" ) : "0 b/s","</span>";
-						echo "</div>";
-					}
-				?>
+    foreach ($uploads as $file) {
+        echo "<div class='card'>";
+        echo "<div class='card-body'>";
+        echo "<h5 class='card-title'>", $file->name, "</h5>";
+        echo "<span class='text-primary'>&uarr; ",
+            CastToXBytes($file->xfer_up, $countUploadDimension),
+            "</span>";
+        echo "<span> | ",
+            $file->xfer_speed > 0
+                ? CastToXBytes($file->xfer_speed, $countSpeed) . "/s"
+                : "0 b/s",
+            "</span>";
+        echo "</div>";
+        echo "</div>";
+    }
+    if (count($uploads) == 0) {
+        echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
+        echo "<span>0 Uploads</span>";
+        echo "</div>";
+    } else {
+        echo "<div class='container-fluid text-dark bg-dark-subtle px-3 py-3'>";
+        echo "<span> ",
+            count($uploads),
+            " Uploads | &uarr; ",
+            CastToXBytes($countUploadDimension, $fakevar),
+            " | ",
+            $countSpeed > 0
+                ? CastToXBytes($countSpeed, $fakevar) . "/s"
+                : "0 b/s",
+            "</span>";
+        echo "</div>";
+    }
+    ?>
 
 	</div>
 </body>
