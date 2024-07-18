@@ -21,7 +21,7 @@
 		<div class="card position-absolute top-50 start-50 translate-middle" style="width: 18rem;">
 			<div class="card-body">
 				<div class="d-flex justify-content-center mb-2">
-					<img src="logo-nav.png" class="mx-auto" alt="...">
+					<img src="logo-nav-2.png" class="mx-auto" alt="...">
 				</div>
 				<h5 class="card-title text-center mb-5">aMule Web</h5>
 				<form name="login">
