@@ -5,13 +5,7 @@
 <head>
 
 	<title>aMule | Search</title>
-	<?php
-		if ( $_SESSION["auto_refresh"] > 0 ) {
-			echo "<meta http-equiv=\"refresh\" content=\"", $_SESSION["auto_refresh"], '">';
-		}
-	?>
-
-	<meta charset="UTF-8" />
+	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
@@ -215,17 +209,6 @@
 		</div>
 	
 		<div class="table-responsive">
-		<!-- Table Download -->
-		<!-- <div class="panel" style="margin-bottom:60px;">
-		<div class="panel-heading panel-center"><h4>SEARCH RESULTS</h4></div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th><a href="amuleweb-main-search.php?sort=name">File name</a></th>
-						<th><a href="amuleweb-main-search.php?sort=size">Size</a></th>
-						<th><a href="amuleweb-main-search.php?sort=sources">Sources</a></th>
-					</tr>
-				</thead> -->
 				<table class="table">
 				<thead class="table-light">
 					<tr>
@@ -303,7 +286,6 @@
 							$max_size *= str2mult($HTTP_GET_VARS["maxsizeu"]);
 
 							amule_do_search_start_cmd($HTTP_GET_VARS["searchval"],
-								//$HTTP_GET_VARS["ext"], $HTTP_GET_VARS["filetype"],
 								"", "",
 								$search_type, $HTTP_GET_VARS["avail"], $min_size, $max_size);
 						} elseif ( $HTTP_GET_VARS["command"] == "download") {
@@ -340,10 +322,6 @@
 
 					foreach ($search as $file) {
 						echo '<tr>';
-						/*echo '<td><label style="font-size:12px;"><input type="checkbox" name="', $file->hash, '" > ',$file->name,'</label></td>';
-						echo '<td style="font-size: 12px;">', CastToXBytes($file->size), '</td>';
-						echo '<td style="font-size: 12px;"><span class="badge badge-default">', $file->sources, '</span></td>';
-						echo '</tr>'; */
 						echo '<td>', '<div class="form-check" style="margin: 0px;"><label><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;', $file->name, "</label></div></td>";
 						echo '<td>', CastToXBytes($file->size), '</td>';
 						echo '<td>', $file->sources, '</td>';
@@ -357,84 +335,5 @@
 		</div>
 	</div>
 	</form>
-
- 	<!-- Footer -->
-	<!-- <div id="footer">
-		<div class="col-md-1"></div>
-		<div class="col-md-5">
-			<form name="formlink" method="post" class="form-inline" action="amuleweb-main-search.php" role="form" id="formed2link">
-    			<div class="btn-group">
-        			<input class="form-control btn-group" name="ed2klink" type="text" id="ed2klink" placeholder="ed2k:// - Insert link" style="border-top-right-radius: 0px; border-bottom-right-radius: 0px; height: 30px;" size="25">
-        			<select class="form-control btn-group" name="selectcat" id="selectcat" style="height: 30px;"> -->
-
-			        <?php
-						/* $cats = amule_get_categories();
-
-						if ( $HTTP_GET_VARS["Submit"] != "" ) {
-							$link = $HTTP_GET_VARS["ed2klink"];
-							$target_cat = $HTTP_GET_VARS["selectcat"];
-							$target_cat_idx = 0;
-
-							foreach($cats as $i => $c) {
-								if ( $target_cat == $c) $target_cat_idx = $i;
-							}
-
-							if ( strlen($link) > 0 ) {
-								$links = split("ed2k://", $link);
-								foreach($links as $linkn) {
-								    amule_do_ed2k_download_cmd("ed2k://" . $linkn, $target_cat_idx);
-								}
-							}
-						}
-
-						foreach($cats as $c) {
-							echo  '<option>', $c, '</option>';
-						} */
-					?>
-
-        		<!-- </select>
-        		<input class="btn btn-default btn-group" type="submit" name="Submit" value="Download link" onClick="amuleweb-main-dload.php" style="height: 30px;">
-    		</div>
-    </form>
-		</div>
-		<div class="col-md-5">
-			<div class="form-inline" style="margin-top:10px;"> -->
-				<?php
-			      	/* $stats = amule_get_stats();
-			    	if ( $stats["id"] == 0 ) {
-			    		$ed2k = "Not connected";
-			    		$ed2k_status = "danger";
-			    	} elseif ( $stats["id"] == 0xffffffff ) {
-			    		$ed2k = "Connecting ...";
-			    		$ed2k_status = "info";
-			    	} else {
-			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)") . " " . $stats["serv_name"] . " " . $stats["serv_addr"];
-			    		$ed2k_status = (($stats["id"] < 16777216) ? "warning" : "success");
-			    	}
-			    	if ( $stats["kad_connected"] == 1 ) {
-			    		$kad1 = "Connected";
-						if ( $stats["kad_firewalled"] == 1 ) {
-							$kad2 = "(FW)";
-							$kad_status = "warning";
-						} else {
-							$kad2 = "(OK)";
-							$kad_status = "success";
-						}
-			    	} else {
-			    		$kad1 = "Disconnected";
-			    		$kad2 = "";
-			    		$kad_status = "danger";
-			    	}
-
-			    	echo '<span class="label label-default">ED2k:</span> ';
-			    	echo '<span class="label label-', $ed2k_status, '">', $ed2k, '</span> ';
-			    	echo '<span class="label label-default">KAD:</span> ';
-			    	echo '<span class="label label-', $kad_status, '">', $kad1, ' ', $kad2, '</span>'; */
-			    ?>
-	<!-- 		</div>
-		</div>
-		<div class="col-md-1"></div>
-	</div>
-</form> -->
 </body>
 </html>
