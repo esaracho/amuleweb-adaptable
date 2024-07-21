@@ -118,7 +118,7 @@
 			    		$ed2k = "Connecting ...";
 			    		$ed2k_status = "bg-info text-dark";
 			    	} else {
-			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)"); //. " " . $stats["serv_name"] . " " . $stats["serv_addr"];
+			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)");
 			    		$ed2k_status = (($stats["id"] < 16777216) ? "bg-warning text-dark" : "bg-success");
 			    	}
 			    	if ( $stats["kad_connected"] == 1 ) {
@@ -197,9 +197,9 @@
 						$sort_order = $HTTP_GET_VARS["sort"];
 
 						if ( ($HTTP_GET_VARS["command"] != "") and ($HTTP_GET_VARS["ip"] != "") and ($HTTP_GET_VARS["port"] != "")) {
-							// if ($_SESSION["guest_login"] == 0) {
+							if ($_SESSION["guest_login"] == 0) {
 								amule_do_server_cmd($HTTP_GET_VARS["ip"], $HTTP_GET_VARS["port"], $HTTP_GET_VARS["command"]);
-							// }
+							}
 						}
 
 						if ( $sort_order == "" ) {
@@ -222,10 +222,6 @@
 						$srvc = $stats["serv_name"];
 
 						foreach ($servers as $srv) {
-
-							/* if ($srv->name == $srvc) {
-								echo '<p>',$srv->name,'</p>';
-							} */
 
 							echo "<tr>";
 
