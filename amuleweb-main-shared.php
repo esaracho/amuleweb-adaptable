@@ -219,39 +219,22 @@
 						return $result;
 					}
 
-					/* function PrioStringSorter($file) {
-						$prionames = array(0 => "Very low", 1 => "Low", 2 => "Normal",
-							3 => "High", 4 => "Very High", 5=> "Auto", 6 => "Release");
-						$result = $prionames[$file['prio']];
-
-						return $result;
-					} */
-
 					$sort_order;$sort_reverse;
 
 					function my_cmp($a, $b)	{
 						global $sort_order, $sort_reverse;
-						//echo '<p>', $sort_order,'</p>';
-						//echo '<p>', $sort_reverse,'</p>';
-
 						switch ( $sort_order) {
 							case "size": $result = $a['size'] > $b['size']; break;
 							case "name": $result = $a['name'] > $b['name']; break;
 							case "xfer": $result = $a['xfer'] > $b['xfer']; break;
 							case "xfer_all": $result = $a['xfer_all'] > $b['xfer_all']; break;
 							case "ratio": $result = $a['ratio'] > $b['ratio']; break;
-							//case "acc": $result = $a['accept'] > $b['accept']; break;
-							//case "acc_all": $result = $a['accept_all'] > $b['accept_all']; break;
-							//case "req": $result = $a['req'] > $b['req']; break;
-							//case "req_all": $result = $a['req_all'] > $b['req_all']; break;
-							//case "prio": $result = PrioStringSorter($a) > PrioStringSorter($b); break;
 							case "prio": $result = $a['prio'] > $b['prio']; break;
 						}
 
 						if ( $sort_reverse ) {
 							$result = !$result;
 						}
-						//var_dump($sort_reverse);
 						return $result;
 					}
 
@@ -260,12 +243,9 @@
 					//
 					
 					if (($HTTP_GET_VARS["command"] != "") && ($_SESSION["guest_login"] == 0)) {
-						//echo var_dump($HTTP_GET_VARS) . "<br>";
-						//amule_do_download_cmd($HTTP_GET_VARS["command"]);
 						foreach ( $HTTP_GET_VARS as $name => $val) {
 							// this is file checkboxes
 							if ( (strlen($name) == 32) and ($val == "on") ) {
-								//var_dump($name);var_dump($val);
 								amule_do_shared_cmd($name, $HTTP_GET_VARS["command"]);
 							}
 						}
@@ -275,24 +255,6 @@
 
 					}
 
-					
-
-					/* foreach ($shared as $file) {
-						echo "<p>", $file->size, "</p>";
-					} */
-
-					// $arrayPrueba = $shared[1];
-					// echo "<p>", $arrayPrueba, "</p>";
-					//foreach ((array)$obj as $key => $val) {
-					
-					/* foreach((array)$arrayPrueba as $key => $val) {
-
-						echo "<p>", $key, $val, "</p>";
-				   } */
-
-					/* foreach($shared[0] as $paramName => $value) {
-					  echo "<p>", $paramName, "</p>";
-					}  */
 
 					$shared = amule_load_vars("shared");
 					$sharedFinal = array(0);
@@ -322,18 +284,6 @@
 						++$index;
 
 					}
-					/* $arrayPrueba = array("dato1" => "hola dato 1", "dato2" => "hola dato 2");
-					$arrayPrueba['dato3'] = "hola dato 3";
-					echo "<p>", $arrayPrueba['dato1'], "</p>";
-					echo "<p>", $arrayPrueba['dato2'], "</p>";
-					echo "<p>", $arrayPrueba['dato3'], "</p>"; */
-				/* 	define("variable1","something");
-					// $variable1 = "hola";
-					$arrayPrueba[variable1];
-
-					echo "<p>", $arrayPrueba->variable1, "</p>"; */
-
-
 
 
 					$sort_order = $HTTP_GET_VARS["sort"];
@@ -347,7 +297,7 @@
 							$_SESSION["sort_reverse"] = !$_SESSION["sort_reverse"];
 						}
 					}
-					//var_dump($_SESSION);
+					
 					$sort_reverse = $_SESSION["sort_reverse"];
 
 					if ( $sort_order != "" ) {
@@ -357,9 +307,6 @@
 
 					if ($HTTP_GET_VARS["select"] == "All" || $HTTP_GET_VARS["select"] == "") {
 						foreach ($sharedFinal as $file) {
-
-							//$ratio = (float)((float)$file->xfer_all / (float)$file->size);
-
 							echo '<tr scope="row">';
 							echo '<td >', '<div class="form-check" style="margin: 0px;"><input class="form-check-input" type="checkbox" name="', $file['hash'], '" >&nbsp;', $file['name'], "</div></td>";
 							echo '<td >', CastToXBytes($file['size']), '</td>';
@@ -369,21 +316,7 @@
 							echo '<td >', PrioString($file), '</td>';
 							echo '</tr>';
 						}
-					} else {
-						foreach ($shared as $file) {
-							if ($HTTP_GET_VARS["select"] == PrioStringSorter($file)) {
-								echo '<tr>';
-
-								echo '<td">', '<div class="form-check" style="margin: 0px;"><label><input class="form-check-input" type="checkbox" name="', $file->hash, '" >&nbsp;', $file->name, "</label></div></td>";
-								echo '<td">', CastToXBytes($file->xfer), " (", CastToXBytes($file->xfer_all),")</td>";
-								echo '<td">', $file->req, " (", $file->req_all, ")</td>";
-								echo '<td">', $file->accept, " (", $file->accept_all, ")</td>";
-								echo '<td">', CastToXBytes($file->size), "</td>";
-								echo '<td">', PrioString($file), "</td>";;
-								echo '</tr>';
-							}
-						}
-					}
+					} 
 				?>
 
 				</tbody>
