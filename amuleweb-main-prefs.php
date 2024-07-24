@@ -59,7 +59,6 @@
 
         $all_opts["webserver"][$i] = $curr_value;
       }
-      //var_dump($all_opts);
       amule_set_options($all_opts);
     }
 
@@ -69,7 +68,6 @@
 
     foreach ($opt_groups as $group) {
       $curr_opts = $opts[$group];
-      //var_dump($curr_opts);
       foreach ($curr_opts as $opt_name => $opt_val) {
         echo 'initvals["', $opt_name, '"] = "', $opt_val, '";';
       }
@@ -206,7 +204,7 @@
 			    		$ed2k = "Connecting ...";
 			    		$ed2k_status = "bg-info text-dark";
 			    	} else {
-			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)"); //. " " . $stats["serv_name"] . " " . $stats["serv_addr"];
+			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)");
 			    		$ed2k_status = (($stats["id"] < 16777216) ? "bg-warning text-dark" : "bg-success");
 			    	}
 			    	if ( $stats["kad_connected"] == 1 ) {
