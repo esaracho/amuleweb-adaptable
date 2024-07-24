@@ -96,7 +96,7 @@
 			    		$ed2k = "Connecting ...";
 			    		$ed2k_status = "bg-info text-dark";
 			    	} else {
-			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)"); //. " " . $stats["serv_name"] . " " . $stats["serv_addr"];
+			    		$ed2k = "Connected " . (($stats["id"] < 16777216) ? "(low)" : "(high)");
 			    		$ed2k_status = (($stats["id"] < 16777216) ? "bg-warning text-dark" : "bg-success");
 			    	}
 			    	if ( $stats["kad_connected"] == 1 ) {
