@@ -24,7 +24,7 @@
 					<img src="logo-nav-2.png" class="mx-auto" alt="...">
 				</div>
 				<h5 class="card-title text-center mb-5">aMule Web</h5>
-				<form name="login">
+				<form action="" method="post" name="login">
 			   			<input name="pass" type="password" class="form-control mb-3" placeholder="Password" required autofocus>
 						<div class="d-grid gap-2">
 			   				<button class="btn btn-secondary" type="submit" name="submit" value="Submit">Login</button>
